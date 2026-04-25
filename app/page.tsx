@@ -1,34 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { TOOLS } from "@/lib/tools";
 
 export const metadata: Metadata = {
   title: "Toolbox — Herramientas simples para tareas reales",
   description:
     "Herramientas gratuitas para emprendedores y trabajo diario. Calcula IVA, boletas de honorarios, genera links de WhatsApp y más. Sin registro.",
 };
-
-const TOOLS = [
-  {
-    href: "/herramientas/generador-link-whatsapp",
-    title: "Generador link de WhatsApp",
-    description: "Crea un enlace directo para que te escriban por WhatsApp",
-  },
-  {
-    href: "/herramientas/calculadora-iva-chile",
-    title: "Calculadora IVA Chile",
-    description: "Calcula el IVA 19% desde monto neto o bruto",
-  },
-  {
-    href: "/herramientas/calculadora-boleta-honorarios-chile",
-    title: "Calculadora Boleta de Honorarios Chile",
-    description: "Calcula cuánto recibirás o cuánto debes emitir en tu boleta",
-  },
-  {
-    href: "/herramientas/simulador-credito",
-    title: "Simulador de Crédito",
-    description: "Calcula tu cuota mensual y tabla de amortización completa",
-  },
-];
 
 export default function Home() {
   return (
@@ -51,42 +29,18 @@ export default function Home() {
             ¿Qué necesitas hacer?
           </h2>
           <div className="space-y-3">
-            <Link
-              href="/herramientas/generador-link-whatsapp"
-              className="flex items-center justify-between bg-white rounded-xl border border-gray-100 px-5 py-4 hover:border-green-200 hover:shadow-sm transition-all group"
-            >
-              <p className="text-sm font-medium text-gray-700 group-hover:text-green-600 transition-colors">
-                Necesito generar un link de WhatsApp
-              </p>
-              <span className="text-gray-300 group-hover:text-green-400 transition-colors ml-4 shrink-0">→</span>
-            </Link>
-            <Link
-              href="/herramientas/calculadora-iva-chile"
-              className="flex items-center justify-between bg-white rounded-xl border border-gray-100 px-5 py-4 hover:border-green-200 hover:shadow-sm transition-all group"
-            >
-              <p className="text-sm font-medium text-gray-700 group-hover:text-green-600 transition-colors">
-                Necesito calcular el IVA en Chile
-              </p>
-              <span className="text-gray-300 group-hover:text-green-400 transition-colors ml-4 shrink-0">→</span>
-            </Link>
-            <Link
-              href="/herramientas/calculadora-boleta-honorarios-chile"
-              className="flex items-center justify-between bg-white rounded-xl border border-gray-100 px-5 py-4 hover:border-green-200 hover:shadow-sm transition-all group"
-            >
-              <p className="text-sm font-medium text-gray-700 group-hover:text-green-600 transition-colors">
-                Necesito saber cuánto recibiré en mi boleta
-              </p>
-              <span className="text-gray-300 group-hover:text-green-400 transition-colors ml-4 shrink-0">→</span>
-            </Link>
-            <Link
-              href="/herramientas/simulador-credito"
-              className="flex items-center justify-between bg-white rounded-xl border border-gray-100 px-5 py-4 hover:border-green-200 hover:shadow-sm transition-all group"
-            >
-              <p className="text-sm font-medium text-gray-700 group-hover:text-green-600 transition-colors">
-                Necesito simular un crédito o préstamo
-              </p>
-              <span className="text-gray-300 group-hover:text-green-400 transition-colors ml-4 shrink-0">→</span>
-            </Link>
+            {TOOLS.map((tool) => (
+              <Link
+                key={tool.href}
+                href={tool.href}
+                className="flex items-center justify-between bg-white rounded-xl border border-gray-100 px-5 py-4 hover:border-green-200 hover:shadow-sm transition-all group"
+              >
+                <p className="text-sm font-medium text-gray-700 group-hover:text-green-600 transition-colors">
+                  {tool.painPoint}
+                </p>
+                <span className="text-gray-300 group-hover:text-green-400 transition-colors ml-4 shrink-0">→</span>
+              </Link>
+            ))}
           </div>
         </div>
 
@@ -108,9 +62,7 @@ export default function Home() {
                   </p>
                   <p className="text-sm text-gray-500 mt-0.5">{tool.description}</p>
                 </div>
-                <span className="text-gray-300 group-hover:text-green-400 transition-colors ml-4 shrink-0">
-                  →
-                </span>
+                <span className="text-gray-300 group-hover:text-green-400 transition-colors ml-4 shrink-0">→</span>
               </Link>
             ))}
           </div>

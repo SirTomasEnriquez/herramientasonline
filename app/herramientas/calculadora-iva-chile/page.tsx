@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import IvaChileCalculator from "@/components/IvaChileCalculator";
+import RelatedTools from "@/components/RelatedTools";
 
 export const metadata: Metadata = {
   title: "Calculadora de IVA Chile — Toolbox",
@@ -80,6 +81,8 @@ export default function CalculadoraIvaChilePage() {
           </div>
         </div>
       </section>
+
+      <RelatedTools currentHref="/herramientas/calculadora-iva-chile" />
     </main>
   );
 }

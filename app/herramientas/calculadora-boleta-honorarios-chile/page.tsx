@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BoletaHonorariosCalculator from "@/components/BoletaHonorariosCalculator";
+import RelatedTools from "@/components/RelatedTools";
 
 export const metadata: Metadata = {
   title: "Calculadora de Boleta de Honorarios Chile 2026 — Toolbox",
@@ -111,6 +112,8 @@ export default function CalculadoraBoletaHonorariosPage() {
           </div>
         </div>
       </section>
+
+      <RelatedTools currentHref="/herramientas/calculadora-boleta-honorarios-chile" />
     </main>
   );
 }

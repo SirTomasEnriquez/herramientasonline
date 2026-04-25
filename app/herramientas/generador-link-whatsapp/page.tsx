@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import WhatsAppLinkGenerator from "@/components/WhatsAppLinkGenerator";
+import RelatedTools from "@/components/RelatedTools";
 
 export const metadata: Metadata = {
   title: "Generador de link de WhatsApp gratis — Toolbox",
@@ -79,6 +80,8 @@ export default function GeneradorLinkWhatsAppPage() {
           </div>
         </div>
       </section>
+
+      <RelatedTools currentHref="/herramientas/generador-link-whatsapp" />
     </main>
   );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LoanSimulator from "@/components/LoanSimulator";
+import RelatedTools from "@/components/RelatedTools";
 
 export const metadata: Metadata = {
   title: "Simulador de Crédito con Tabla de Amortización — Toolbox",
@@ -31,6 +32,8 @@ export default function SimuladorCreditoPage() {
           hipotecarios o decisiones financieras en negocios.
         </p>
       </section>
+
+      <RelatedTools currentHref="/herramientas/simulador-credito" />
     </main>
   );
 }
