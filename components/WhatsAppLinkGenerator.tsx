@@ -99,11 +99,13 @@ export default function WhatsAppLinkGenerator() {
       <div className="space-y-5">
         {/* Phone input */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">
+          <label htmlFor="phone-number" className="block text-sm font-medium text-gray-700 mb-1.5">
             Número de teléfono <span className="text-red-500">*</span>
           </label>
           <div className="flex gap-2">
             <select
+              id="country-code"
+              aria-label="Código de país"
               value={countryCode}
               onChange={(e) => setCountryCode(e.target.value)}
               className="w-44 shrink-0 rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
@@ -115,27 +117,30 @@ export default function WhatsAppLinkGenerator() {
               ))}
             </select>
             <input
+              id="phone-number"
               type="tel"
               value={phone}
               onChange={handlePhoneChange}
               placeholder="912345678"
+              aria-describedby={phoneError ? "phone-error" : undefined}
               className={`flex-1 min-w-0 rounded-lg border px-3 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${
                 phoneError ? "border-red-400 bg-red-50" : "border-gray-300"
               }`}
             />
           </div>
           {phoneError && (
-            <p className="mt-1.5 text-xs text-red-600">{phoneError}</p>
+            <p id="phone-error" className="mt-1.5 text-xs text-red-600">{phoneError}</p>
           )}
         </div>
 
         {/* Message input */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">
+          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1.5">
             Mensaje predeterminado{" "}
             <span className="text-gray-400 font-normal">(opcional)</span>
           </label>
           <textarea
+            id="message"
             value={message}
             onChange={(e) => setMessage(e.target.value.slice(0, 200))}
             placeholder="Hola, quiero más información."

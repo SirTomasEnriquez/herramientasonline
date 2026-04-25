@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://toolbox.cl"),
   title: "Toolbox — Herramientas para emprendedores",
   description: "Micro-herramientas web gratuitas para emprendedores. Sin registro, sin fricción.",
 };
