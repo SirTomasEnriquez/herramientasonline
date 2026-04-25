@@ -23,6 +23,11 @@ const TOOLS = [
     title: "Calculadora Boleta de Honorarios Chile",
     description: "Calcula cuánto recibirás o cuánto debes emitir en tu boleta",
   },
+  {
+    href: "/herramientas/simulador-credito",
+    title: "Simulador de Crédito",
+    description: "Calcula tu cuota mensual y tabla de amortización completa",
+  },
 ];
 
 export default function HerramientasPage() {

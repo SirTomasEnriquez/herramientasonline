@@ -23,6 +23,11 @@ const TOOLS = [
     title: "Calculadora Boleta de Honorarios Chile",
     description: "Calcula cuánto recibirás o cuánto debes emitir en tu boleta",
   },
+  {
+    href: "/herramientas/simulador-credito",
+    title: "Simulador de Crédito",
+    description: "Calcula tu cuota mensual y tabla de amortización completa",
+  },
 ];
 
 export default function Home() {
@@ -70,6 +75,15 @@ export default function Home() {
             >
               <p className="text-sm font-medium text-gray-700 group-hover:text-green-600 transition-colors">
                 Necesito saber cuánto recibiré en mi boleta
+              </p>
+              <span className="text-gray-300 group-hover:text-green-400 transition-colors ml-4 shrink-0">→</span>
+            </Link>
+            <Link
+              href="/herramientas/simulador-credito"
+              className="flex items-center justify-between bg-white rounded-xl border border-gray-100 px-5 py-4 hover:border-green-200 hover:shadow-sm transition-all group"
+            >
+              <p className="text-sm font-medium text-gray-700 group-hover:text-green-600 transition-colors">
+                Necesito simular un crédito o préstamo
               </p>
               <span className="text-gray-300 group-hover:text-green-400 transition-colors ml-4 shrink-0">→</span>
             </Link>
