@@ -40,6 +40,42 @@ export default function Home() {
           </p>
         </div>
 
+        {/* What do you need to do? */}
+        <div className="mb-12">
+          <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">
+            ¿Qué necesitas hacer?
+          </h2>
+          <div className="space-y-3">
+            <Link
+              href="/herramientas/generador-link-whatsapp"
+              className="flex items-center justify-between bg-white rounded-xl border border-gray-100 px-5 py-4 hover:border-green-200 hover:shadow-sm transition-all group"
+            >
+              <p className="text-sm font-medium text-gray-700 group-hover:text-green-600 transition-colors">
+                Necesito generar un link de WhatsApp
+              </p>
+              <span className="text-gray-300 group-hover:text-green-400 transition-colors ml-4 shrink-0">→</span>
+            </Link>
+            <Link
+              href="/herramientas/calculadora-iva-chile"
+              className="flex items-center justify-between bg-white rounded-xl border border-gray-100 px-5 py-4 hover:border-green-200 hover:shadow-sm transition-all group"
+            >
+              <p className="text-sm font-medium text-gray-700 group-hover:text-green-600 transition-colors">
+                Necesito calcular el IVA en Chile
+              </p>
+              <span className="text-gray-300 group-hover:text-green-400 transition-colors ml-4 shrink-0">→</span>
+            </Link>
+            <Link
+              href="/herramientas/calculadora-boleta-honorarios-chile"
+              className="flex items-center justify-between bg-white rounded-xl border border-gray-100 px-5 py-4 hover:border-green-200 hover:shadow-sm transition-all group"
+            >
+              <p className="text-sm font-medium text-gray-700 group-hover:text-green-600 transition-colors">
+                Necesito saber cuánto recibiré en mi boleta
+              </p>
+              <span className="text-gray-300 group-hover:text-green-400 transition-colors ml-4 shrink-0">→</span>
+            </Link>
+          </div>
+        </div>
+
         {/* Featured tools */}
         <div className="mb-8">
           <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">
