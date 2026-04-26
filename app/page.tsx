@@ -3,7 +3,7 @@ import Link from "next/link";
 import { TOOLS } from "@/lib/tools";
 
 export const metadata: Metadata = {
-  title: "Toolbox — Herramientas simples para tareas reales",
+  title: "Herramientas Online — Herramientas simples para tareas reales",
   description:
     "Herramientas gratuitas para emprendedores y trabajo diario. Calcula IVA, boletas de honorarios, genera links de WhatsApp y más. Sin registro.",
 };

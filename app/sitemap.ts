@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = "https://toolbox.cl";
+const BASE_URL = "https://herramientasonline.cl";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

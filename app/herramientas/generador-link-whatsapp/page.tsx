@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import WhatsAppLinkGenerator from "@/components/WhatsAppLinkGenerator";
 import RelatedTools from "@/components/RelatedTools";
 
-const BASE_URL = "https://toolbox.cl";
+const BASE_URL = "https://herramientasonline.cl";
 const PAGE_PATH = "/herramientas/generador-link-whatsapp";
 const PAGE_URL = `${BASE_URL}${PAGE_PATH}`;
 
 export const metadata: Metadata = {
-  title: "Generador de link de WhatsApp gratis — Toolbox",
+  title: "Generador de link de WhatsApp gratis — Herramientas Online",
   description:
     "Crea tu link de WhatsApp en segundos. Pega el número, agrega un mensaje opcional y comparte el enlace directo. Sin apps, sin registro.",
   alternates: {
@@ -18,13 +18,13 @@ export const metadata: Metadata = {
     description:
       "Crea tu link de WhatsApp en segundos. Pega el número, agrega un mensaje opcional y comparte el enlace directo. Sin apps, sin registro.",
     url: PAGE_PATH,
-    siteName: "Toolbox",
+    siteName: "Herramientas Online",
     locale: "es_CL",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Generador de link de WhatsApp gratis — Toolbox",
+    title: "Generador de link de WhatsApp gratis — Herramientas Online",
     description:
       "Crea tu link de WhatsApp en segundos. Sin apps, sin registro.",
   },

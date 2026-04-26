@@ -3,7 +3,7 @@ import BoletaHonorariosCalculator from "@/components/BoletaHonorariosCalculator"
 import RelatedTools from "@/components/RelatedTools";
 
 export const metadata: Metadata = {
-  title: "Calculadora de Boleta de Honorarios Chile 2026 — Toolbox",
+  title: "Calculadora de Boleta de Honorarios Chile 2026 — Herramientas Online",
   description:
     "Calcula tu boleta de honorarios con la tasa oficial del SII 2026: 15,25% según Ley 21.133. Desde bruto o desde líquido. Incluye el caso del Préstamo Solidario COVID.",
 };

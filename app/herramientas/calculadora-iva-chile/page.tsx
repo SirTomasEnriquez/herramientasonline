@@ -3,7 +3,7 @@ import IvaChileCalculator from "@/components/IvaChileCalculator";
 import RelatedTools from "@/components/RelatedTools";
 
 export const metadata: Metadata = {
-  title: "Calculadora de IVA Chile — Toolbox",
+  title: "Calculadora de IVA Chile — Herramientas Online",
   description:
     "Calcula el IVA en Chile de forma rápida. Ingresa un monto neto o bruto y obtén el IVA 19%, el total y el valor sin impuesto.",
 };

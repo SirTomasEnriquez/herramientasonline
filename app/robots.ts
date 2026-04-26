@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://toolbox.cl/sitemap.xml",
+    sitemap: "https://herramientasonline.cl/sitemap.xml",
   };
 }

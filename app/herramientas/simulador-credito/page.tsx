@@ -3,7 +3,7 @@ import LoanSimulator from "@/components/LoanSimulator";
 import RelatedTools from "@/components/RelatedTools";
 
 export const metadata: Metadata = {
-  title: "Simulador de Crédito con Tabla de Amortización — Toolbox",
+  title: "Simulador de Crédito con Tabla de Amortización — Herramientas Online",
   description:
     "Calcula tu crédito en segundos. Ingresa monto, tasa y plazo y obtén la cuota mensual y la tabla completa de amortización.",
 };
