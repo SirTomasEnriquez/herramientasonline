@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import IvaChileCalculator from "@/components/IvaChileCalculator";
 import RelatedTools from "@/components/RelatedTools";
+import { buildToolPageSchema, stringifyJsonLd } from "@/lib/schema";
+import { getToolBySlug } from "@/lib/tools";
+
+const tool = getToolBySlug("calculadora-iva-chile")!;
 
 export const metadata: Metadata = {
   title: "Calculadora de IVA Chile — Herramientas Online",
@@ -8,9 +12,37 @@ export const metadata: Metadata = {
     "Calcula el IVA en Chile de forma rápida. Ingresa un monto neto o bruto y obtén el IVA 19%, el total y el valor sin impuesto.",
 };
 
+const faqs = [
+  {
+    question: "¿Cuál es el IVA en Chile?",
+    answer: "El IVA general en Chile es 19%.",
+  },
+  {
+    question: "¿Qué diferencia hay entre monto neto y monto bruto?",
+    answer:
+      "El monto neto es el valor sin IVA. El monto bruto es el valor final con IVA incluido.",
+  },
+  {
+    question: "¿Esta calculadora reemplaza asesoría contable?",
+    answer:
+      "No. Es una herramienta referencial para cálculos simples y no reemplaza asesoría contable o tributaria.",
+  },
+];
+
+const toolPageSchema = buildToolPageSchema(tool, faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Herramientas", path: "/herramientas" },
+  { name: tool.name, path: tool.path },
+]);
+
 export default function CalculadoraIvaChilePage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(toolPageSchema) }}
+      />
+
       {/* Tool zone */}
       <section className="max-w-lg mx-auto mb-16">
         <div className="text-center mb-8">

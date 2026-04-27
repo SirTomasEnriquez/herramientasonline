@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import WhatsAppLinkGenerator from "@/components/WhatsAppLinkGenerator";
 import RelatedTools from "@/components/RelatedTools";
+import { buildToolPageSchema, stringifyJsonLd } from "@/lib/schema";
+import { getToolBySlug } from "@/lib/tools";
 
-const BASE_URL = "https://herramientasonline.cl";
 const PAGE_PATH = "/herramientas/generador-link-whatsapp";
-const PAGE_URL = `${BASE_URL}${PAGE_PATH}`;
+const tool = getToolBySlug("generador-link-whatsapp")!;
 
 export const metadata: Metadata = {
   title: "Generador de link de WhatsApp gratis — Herramientas Online",
@@ -30,119 +31,46 @@ export const metadata: Metadata = {
   },
 };
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "¿Necesito tener WhatsApp instalado para usar esta herramienta?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "No. La herramienta genera el link en tu navegador. Quien hace clic en el link sí necesita WhatsApp instalado.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "¿Funciona para WhatsApp Business?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Sí. El link funciona exactamente igual para cuentas personales y cuentas de WhatsApp Business.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "¿El mensaje predeterminado es obligatorio?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "No. Puedes generar un link solo con el número y quien haga clic abrirá WhatsApp con el chat vacío.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "¿Puedo agregar un mensaje automático al link de WhatsApp?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Sí. Al generar el link puedes escribir un mensaje predeterminado que aparecerá listo para enviar cuando alguien haga clic. Es ideal para consultas de ventas, atención al cliente o campañas específicas.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "¿Cómo comparto el link de WhatsApp generado?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Una vez generado, copia el link y pégalo donde quieras: bio de Instagram, TikTok, firma de correo electrónico, publicaciones de ventas, página web o cualquier canal digital.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "¿Funciona el generador para Chile y otros países de Latinoamérica?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Sí. Incluye códigos de país para Chile (+56), Argentina, México, Colombia, Perú, Uruguay, Bolivia, Ecuador, Paraguay y Centroamérica. El link generado funciona con cualquier número de WhatsApp del mundo.",
-      },
-    },
-  ],
-};
-
-const webAppSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  name: "Generador de link de WhatsApp gratis",
-  url: PAGE_URL,
-  description:
-    "Herramienta gratuita para crear links de WhatsApp con mensaje predeterminado. Sin registro. Disponible para Chile y Latinoamérica.",
-  applicationCategory: "UtilitiesApplication",
-  operatingSystem: "Web",
-  inLanguage: "es",
-  isAccessibleForFree: true,
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "CLP",
+const faqs = [
+  {
+    question: "¿Necesito tener WhatsApp instalado para usar esta herramienta?",
+    answer:
+      "No. La herramienta genera el link en tu navegador. Quien hace clic en el link sí necesita WhatsApp instalado.",
   },
-  areaServed: ["CL", "AR", "MX", "CO", "PE", "UY", "BO", "EC", "PY"],
-};
+  {
+    question: "¿Funciona para WhatsApp Business?",
+    answer:
+      "Sí. El link funciona exactamente igual para cuentas personales y cuentas de WhatsApp Business.",
+  },
+  {
+    question: "¿El mensaje predeterminado es obligatorio?",
+    answer:
+      "No. Puedes generar un link solo con el número y quien haga clic abrirá WhatsApp con el chat vacío.",
+  },
+  {
+    question: "¿Puedo agregar un mensaje automático al link?",
+    answer:
+      "Sí. Escribe el mensaje en el campo opcional antes de generar el link. Ese texto aparecerá pre-cargado en el chat de quien haga clic, listo para enviar.",
+  },
+  {
+    question: "¿Cómo comparto el link generado?",
+    answer:
+      "Copia el link con el botón Copiar y pégalo donde necesites: bio de Instagram, publicación de Facebook, correo, página web o cualquier canal digital.",
+  },
+];
 
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Inicio",
-      item: BASE_URL,
-    },
-    {
-      "@type": "ListItem",
-      position: 2,
-      name: "Herramientas",
-      item: `${BASE_URL}/herramientas`,
-    },
-    {
-      "@type": "ListItem",
-      position: 3,
-      name: "Generador de link de WhatsApp",
-      item: PAGE_URL,
-    },
-  ],
-};
+const toolPageSchema = buildToolPageSchema(tool, faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Herramientas", path: "/herramientas" },
+  { name: tool.name, path: tool.path },
+]);
 
 export default function GeneradorLinkWhatsAppPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(toolPageSchema) }}
       />
 
       {/* Tool zone */}

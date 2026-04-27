@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import LoanSimulator from "@/components/LoanSimulator";
 import RelatedTools from "@/components/RelatedTools";
+import { buildToolPageSchema, stringifyJsonLd } from "@/lib/schema";
+import { getToolBySlug } from "@/lib/tools";
+
+const tool = getToolBySlug("simulador-credito")!;
 
 export const metadata: Metadata = {
   title: "Simulador de Crédito con Tabla de Amortización — Herramientas Online",
@@ -8,9 +12,27 @@ export const metadata: Metadata = {
     "Calcula tu crédito en segundos. Ingresa monto, tasa y plazo y obtén la cuota mensual y la tabla completa de amortización.",
 };
 
+const faqs = [
+  {
+    question: tool.question,
+    answer: tool.answer,
+  },
+];
+
+const toolPageSchema = buildToolPageSchema(tool, faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Herramientas", path: "/herramientas" },
+  { name: tool.name, path: tool.path },
+]);
+
 export default function SimuladorCreditoPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(toolPageSchema) }}
+      />
+
       {/* Tool zone */}
       <section className="max-w-2xl mx-auto mb-16">
         <div className="text-center mb-8">

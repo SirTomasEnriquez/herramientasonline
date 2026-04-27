@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import BoletaHonorariosCalculator from "@/components/BoletaHonorariosCalculator";
 import RelatedTools from "@/components/RelatedTools";
+import { buildToolPageSchema, stringifyJsonLd } from "@/lib/schema";
+import { getToolBySlug } from "@/lib/tools";
+
+const tool = getToolBySlug("calculadora-boleta-honorarios-chile")!;
 
 export const metadata: Metadata = {
   title: "Calculadora de Boleta de Honorarios Chile 2026 — Herramientas Online",
@@ -8,9 +12,38 @@ export const metadata: Metadata = {
     "Calcula tu boleta de honorarios con la tasa oficial del SII 2026: 15,25% según Ley 21.133. Desde bruto o desde líquido. Incluye el caso del Préstamo Solidario COVID.",
 };
 
+const faqs = [
+  {
+    question: "¿Cuál es la tasa de retención de boleta de honorarios en Chile 2026?",
+    answer:
+      "La tasa general es 15,25% según la Ley N° 21.133. Para quienes tienen deuda del Préstamo Solidario COVID, la tasa es 18,25%.",
+  },
+  {
+    question: "¿Qué diferencia hay entre monto bruto y monto líquido en una boleta?",
+    answer:
+      "El monto bruto es el valor total de la boleta. El monto líquido es lo que efectivamente recibes después de descontar el impuesto retenido.",
+  },
+  {
+    question: "¿Esta calculadora reemplaza asesoría contable?",
+    answer:
+      "No. Es una herramienta referencial basada en la tasa oficial SII 2026 (Ley 21.133) y no reemplaza asesoría contable o tributaria.",
+  },
+];
+
+const toolPageSchema = buildToolPageSchema(tool, faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Herramientas", path: "/herramientas" },
+  { name: tool.name, path: tool.path },
+]);
+
 export default function CalculadoraBoletaHonorariosPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(toolPageSchema) }}
+      />
+
       {/* Tool zone */}
       <section className="max-w-lg mx-auto mb-16">
         <div className="text-center mb-8">
