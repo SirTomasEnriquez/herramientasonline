@@ -6,13 +6,21 @@ import { getToolBySlug } from "@/lib/tools";
 const mainTool = getToolBySlug("calculadora-boleta-honorarios-chile")!;
 const relatedTool = getToolBySlug("calculadora-iva-chile")!;
 const relatedGuides = GUIDES.filter((guide) =>
-  ["retencion-boleta-honorarios-2026", "calcular-iva-chile"].includes(guide.slug),
+  [
+    "retencion-boleta-honorarios-2026",
+    "calcular-liquido-boleta-honorarios",
+    "cuanto-retiene-boleta-honorarios",
+    "como-calcular-boleta-honorarios-liquido",
+  ].includes(guide.slug),
 );
 
 export const metadata: Metadata = {
-  title: "Cómo calcular una boleta de honorarios en Chile — Herramientas Online",
+  title: "Cómo calcular una boleta de honorarios en Chile — Guía 2026",
   description:
-    "Guía simple para entender monto bruto, monto líquido y retención en una boleta de honorarios en Chile.",
+    "Aprende a calcular el monto bruto, la retención y el monto líquido de una boleta de honorarios en Chile con la tasa SII 2026: 15,25%.",
+  alternates: {
+    canonical: "/guias/boleta-honorarios-chile",
+  },
 };
 
 export default function BoletaHonorariosChileGuidePage() {
@@ -24,36 +32,83 @@ export default function BoletaHonorariosChileGuidePage() {
           Cómo calcular una boleta de honorarios en Chile
         </h1>
         <p className="text-gray-600 leading-relaxed">
-          Una boleta de honorarios muestra un monto bruto, una retención y un monto líquido. Para
-          independientes y emprendedores, revisar estos valores evita diferencias al momento de cobrar.
+          Una boleta de honorarios tiene tres valores clave: monto bruto, retención de impuesto y
+          monto líquido. Para trabajadores independientes y emprendedores, entender cómo se
+          relacionan estos valores evita errores al acordar pagos y al emitir documentos en el SII.
         </p>
 
-        <h2>Qué es una boleta de honorarios</h2>
+        <h2>¿Qué es una boleta de honorarios?</h2>
         <p>
-          Es un documento usado por trabajadores independientes para cobrar servicios. Normalmente,
-          quien paga retiene un porcentaje y tú recibes el monto líquido.
+          Es el documento que emiten los trabajadores independientes para cobrar servicios
+          profesionales en Chile. A diferencia de una factura, no incluye IVA — en su lugar, aplica
+          una retención de impuesto que quien paga entrega directamente al SII. Tú recibes el monto
+          líquido y el impuesto retenido queda acreditado a tu nombre para la declaración anual.
         </p>
 
-        <h2>Cómo se calcula</h2>
+        <h2>La fórmula de la retención</h2>
         <p>
-          Desde el monto bruto se descuenta la retención vigente. El resultado es el monto líquido.
-          Si quieres recibir un líquido específico, debes calcular hacia atrás el bruto necesario.
+          La tasa general de retención para 2026 es <strong>15,25%</strong>, según la Ley N° 21.133.
         </p>
 
-        <h2>Ejemplo práctico</h2>
+        <p className="font-semibold text-gray-700 mb-1">Desde monto bruto:</p>
+        <pre className="bg-gray-100 rounded-lg px-4 py-3 text-sm overflow-x-auto">
+{`Retención = Bruto × 0,1525
+Líquido   = Bruto × 0,8475`}
+        </pre>
+
+        <p className="font-semibold text-gray-700 mb-1 mt-4">Desde monto líquido deseado:</p>
+        <pre className="bg-gray-100 rounded-lg px-4 py-3 text-sm overflow-x-auto">
+{`Bruto     = Líquido / 0,8475
+Retención = Bruto − Líquido`}
+        </pre>
+
+        <h2>Ejemplo con números reales</h2>
+        <div className="my-6 rounded-xl bg-green-50 border border-green-100 px-5 py-4">
+          <p className="text-sm text-green-800 font-medium mb-2">Ejemplo 1 — desde bruto</p>
+          <p className="text-sm text-green-700 mb-3">
+            Boleta por $100.000 → retención $15.250 → recibes $84.750
+          </p>
+          <p className="text-sm text-green-800 font-medium mb-2">Ejemplo 2 — desde líquido</p>
+          <p className="text-sm text-green-700">
+            Quiero recibir $100.000 → debo emitir por $118.343 → retención $18.343
+          </p>
+        </div>
+
+        <h2>Caso especial: Préstamo Solidario COVID</h2>
         <p>
-          Si emites una boleta por $100.000 y la retención es 15,25%, se retienen $15.250 y recibes
-          $84.750. Si necesitas recibir $100.000 líquidos, el monto bruto debe ser mayor.
+          Quienes tienen deuda pendiente del Préstamo Solidario (Leyes 21.242 y 21.252) tienen
+          una retención adicional del 3%, llevando la tasa total a <strong>18,25%</strong> hasta
+          que salden el préstamo.
+        </p>
+        <pre className="bg-gray-100 rounded-lg px-4 py-3 text-sm overflow-x-auto">
+{`Retención = Bruto × 0,1825
+Líquido   = Bruto × 0,8175`}
+        </pre>
+        <p className="text-sm text-gray-500 mt-2">
+          Puedes verificar si tienes deuda pendiente en el sitio oficial del SII.
         </p>
 
-        <h2>Cuándo usar la herramienta</h2>
+        <h2>¿Qué incluye el impuesto retenido?</h2>
         <p>
-          Usa la calculadora antes de emitir una boleta o acordar un pago, especialmente si necesitas
-          saber cuánto recibirás realmente.
+          La retención de la boleta de honorarios corresponde al impuesto de segunda categoría
+          sobre los ingresos de los trabajadores independientes. No es un descuento perdido — se
+          acredita íntegramente en tu declaración anual de renta (Formulario 22) y puede darte
+          derecho a devolución dependiendo de tu situación tributaria.
         </p>
+
+        <h2>¿Cuándo no aplica la retención?</h2>
         <p>
-          El cálculo es referencial porque la tasa puede cambiar y algunos casos tienen reglas
-          especiales. Para decisiones tributarias, valida con el SII o con un contador.
+          En algunos casos, quien paga no retiene el impuesto — por ejemplo, cuando el pagador es
+          una persona natural que no lleva contabilidad. En esos casos, el trabajador independiente
+          debe declarar y pagar el impuesto directamente. Consulta con un contador si tienes dudas
+          sobre tu situación específica.
+        </p>
+
+        <h2>Cuándo usar la calculadora</h2>
+        <p>
+          Usa la calculadora antes de emitir una boleta para saber exactamente cuánto recibirás,
+          o cuando necesitas saber qué bruto emitir para recibir un líquido específico. Es
+          especialmente útil al negociar tarifas con clientes.
         </p>
 
         <p>
@@ -68,16 +123,33 @@ export default function BoletaHonorariosChileGuidePage() {
         <h2>Preguntas frecuentes</h2>
         <div className="space-y-5">
           <div>
-            <h3>¿Qué es el monto bruto?</h3>
-            <p>Es el total de la boleta antes de descontar la retención.</p>
+            <h3>¿Cuál es la retención de boleta de honorarios en Chile 2026?</h3>
+            <p>
+              La tasa general es 15,25% según la Ley N° 21.133. Para quienes tienen deuda del
+              Préstamo Solidario COVID, la tasa sube a 18,25%.
+            </p>
           </div>
           <div>
-            <h3>¿Qué es el monto líquido?</h3>
-            <p>Es lo que recibes después de descontar la retención de impuestos.</p>
+            <h3>¿Qué diferencia hay entre monto bruto y monto líquido?</h3>
+            <p>
+              El monto bruto es el total de la boleta. El monto líquido es lo que efectivamente
+              recibes después de descontar la retención de impuesto.
+            </p>
           </div>
           <div>
-            <h3>¿La calculadora reemplaza asesoría contable?</h3>
-            <p>No. Sirve para cálculos simples y referenciales, no para resolver casos tributarios complejos.</p>
+            <h3>¿El impuesto retenido se pierde?</h3>
+            <p>
+              No. Queda acreditado a tu nombre y se descuenta en tu declaración anual de renta.
+              Dependiendo de tu nivel de ingresos, puede darte derecho a devolución.
+            </p>
+          </div>
+          <div>
+            <h3>¿Esta calculadora reemplaza asesoría contable?</h3>
+            <p>
+              No. Sirve para cálculos referenciales con la tasa oficial SII 2026. Para resolver
+              casos con retenciones especiales o situaciones tributarias particulares, consulta
+              con un contador.
+            </p>
           </div>
         </div>
 
@@ -93,10 +165,13 @@ export default function BoletaHonorariosChileGuidePage() {
         <h2>Links relacionados</h2>
         <ul>
           <li>
+            <Link href={mainTool.href}>{mainTool.title}</Link>
+          </li>
+          <li>
             <Link href={relatedTool.href}>{relatedTool.title}</Link>
           </li>
           <li>
-            <Link href="/herramientas">Ver herramientas disponibles</Link>
+            <Link href="/herramientas">Ver todas las herramientas</Link>
           </li>
         </ul>
       </article>
