@@ -2,12 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import BoletaHonorariosCalculator from "@/components/BoletaHonorariosCalculator";
 import RelatedTools from "@/components/RelatedTools";
-import { getGuideBySlug } from "@/lib/guides";
+import { GUIDES } from "@/lib/guides";
 import { buildToolPageSchema, stringifyJsonLd } from "@/lib/schema";
 import { TOOLS, getToolBySlug } from "@/lib/tools";
 
 const tool = getToolBySlug("calculadora-boleta-honorarios-chile")!;
-const relatedGuide = getGuideBySlug("boleta-honorarios-chile")!;
+const relatedGuides = GUIDES.filter((guide) =>
+  [
+    "boleta-honorarios-chile",
+    "retencion-boleta-honorarios-2026",
+    "calcular-liquido-boleta-honorarios",
+    "cuanto-retiene-boleta-honorarios",
+  ].includes(guide.slug),
+);
 const relatedTools = TOOLS.filter((item) =>
   ["calculadora-iva-chile", "simulador-credito"].includes(item.slug),
 );
@@ -155,9 +162,11 @@ export default function CalculadoraBoletaHonorariosPage() {
       <section className="max-w-2xl mx-auto mt-10 prose prose-gray prose-sm sm:prose-base">
         <h2>Guías relacionadas</h2>
         <ul>
-          <li>
-            <Link href={relatedGuide.href}>{relatedGuide.title}</Link>
-          </li>
+          {relatedGuides.map((guide) => (
+            <li key={guide.slug}>
+              <Link href={guide.href}>{guide.title}</Link>
+            </li>
+          ))}
         </ul>
 
         <h2>Otras herramientas</h2>

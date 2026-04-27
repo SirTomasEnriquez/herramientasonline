@@ -2,12 +2,20 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import IvaChileCalculator from "@/components/IvaChileCalculator";
 import RelatedTools from "@/components/RelatedTools";
-import { getGuideBySlug } from "@/lib/guides";
+import { GUIDES } from "@/lib/guides";
 import { buildToolPageSchema, stringifyJsonLd } from "@/lib/schema";
 import { TOOLS, getToolBySlug } from "@/lib/tools";
 
 const tool = getToolBySlug("calculadora-iva-chile")!;
-const relatedGuide = getGuideBySlug("calcular-iva-chile")!;
+const relatedGuides = GUIDES.filter((guide) =>
+  [
+    "calcular-iva-chile",
+    "calcular-iva-desde-monto-bruto",
+    "calcular-iva-desde-monto-neto",
+    "formula-del-iva-chile",
+    "cuanto-es-el-iva-en-chile",
+  ].includes(guide.slug),
+);
 const relatedTools = TOOLS.filter((item) =>
   ["calculadora-boleta-honorarios-chile", "simulador-credito"].includes(item.slug),
 );
@@ -123,9 +131,11 @@ export default function CalculadoraIvaChilePage() {
       <section className="max-w-2xl mx-auto mt-10 prose prose-gray prose-sm sm:prose-base">
         <h2>Guías relacionadas</h2>
         <ul>
-          <li>
-            <Link href={relatedGuide.href}>{relatedGuide.title}</Link>
-          </li>
+          {relatedGuides.map((guide) => (
+            <li key={guide.slug}>
+              <Link href={guide.href}>{guide.title}</Link>
+            </li>
+          ))}
         </ul>
 
         <h2>Otras herramientas</h2>

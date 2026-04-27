@@ -9,7 +9,12 @@ import { TOOLS, getToolBySlug } from "@/lib/tools";
 const PAGE_PATH = "/herramientas/generador-link-whatsapp";
 const tool = getToolBySlug("generador-link-whatsapp")!;
 const relatedGuides = GUIDES.filter((guide) =>
-  ["calcular-iva-chile", "boleta-honorarios-chile"].includes(guide.slug),
+  [
+    "link-whatsapp-con-mensaje",
+    "crear-link-whatsapp-para-instagram",
+    "como-hacer-link-de-whatsapp",
+    "whatsapp-link-generator",
+  ].includes(guide.slug),
 );
 const relatedTools = TOOLS.filter((item) =>
   ["calculadora-iva-chile", "calculadora-boleta-honorarios-chile"].includes(item.slug),
