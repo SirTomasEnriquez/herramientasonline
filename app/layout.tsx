@@ -13,6 +13,29 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Herramientas Online",
+  url: "https://herramientasonline.cl",
+  description:
+    "Herramientas financieras simples, gratuitas y sin registro para emprendedores en Chile.",
+  inLanguage: "es-CL",
+  audience: {
+    "@type": "Audience",
+    audienceType: "Emprendedores en Chile",
+  },
+  knowsAbout: [
+    "IVA Chile",
+    "Servicio de Impuestos Internos",
+    "Boletas de honorarios",
+    "Finanzas para emprendedores",
+    "Cálculos tributarios simples",
+    "Créditos y amortización",
+  ],
+  sameAs: ["https://herramientasonline.cl"],
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://herramientasonline.cl"),
   title: "Herramientas Online — Herramientas para emprendedores",
@@ -30,6 +53,12 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
         <header className="bg-white border-b border-gray-100 sticky top-0 z-10">
           <div className="max-w-2xl mx-auto px-4 h-14 flex items-center justify-between">
             <Link href="/" className="text-sm font-semibold text-gray-900 hover:text-green-600 transition-colors">
