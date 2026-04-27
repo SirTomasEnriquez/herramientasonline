@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { GUIDES } from "@/lib/guides";
 
 const BASE_URL = "https://herramientasonline.cl";
 
@@ -40,23 +41,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    {
-      url: `${BASE_URL}/guias/calcular-iva-chile`,
+    ...GUIDES.map((guide) => ({
+      url: `${BASE_URL}${guide.href}`,
       lastModified: new Date(),
-      changeFrequency: "monthly",
+      changeFrequency: "weekly" as const,
       priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/guias/boleta-honorarios-chile`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/guias/simular-credito`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
+    })),
   ];
 }
