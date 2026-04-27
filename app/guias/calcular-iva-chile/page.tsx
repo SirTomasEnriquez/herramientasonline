@@ -6,7 +6,7 @@ import { getToolBySlug } from "@/lib/tools";
 const mainTool = getToolBySlug("calculadora-iva-chile")!;
 const relatedTool = getToolBySlug("calculadora-boleta-honorarios-chile")!;
 const relatedGuides = GUIDES.filter((guide) =>
-  ["boleta-honorarios-chile", "simular-credito"].includes(guide.slug),
+  ["calcular-iva-desde-monto-bruto", "calcular-iva-desde-monto-neto"].includes(guide.slug),
 );
 
 export const metadata: Metadata = {
