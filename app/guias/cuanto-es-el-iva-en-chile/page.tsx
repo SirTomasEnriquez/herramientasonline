@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const tool = getToolBySlug("calculadora-iva-chile")!;
 const relatedGuides = GUIDES.filter((guide) =>
@@ -12,6 +13,18 @@ const relatedGuides = GUIDES.filter((guide) =>
   ].includes(guide.slug),
 );
 
+const faqs = [
+  { question: "¿El IVA en Chile siempre ha sido 19%?", answer: "No. Fue 20% hasta 1998. Bajó a 18% en 1999 y subió a 19% en 2003, donde se mantiene hasta hoy." },
+  { question: "¿El IVA lo paga el comprador o el vendedor?", answer: "Lo paga el comprador final. El vendedor actúa como agente retenedor: lo cobra y lo entera al SII mensualmente." },
+  { question: "¿Cómo sé si un precio incluye IVA?", answer: "Los precios al consumidor en Chile deben incluir IVA por ley. Las facturas entre empresas muestran neto e IVA por separado." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "¿Cuánto es el IVA en Chile?", path: "/guias/cuanto-es-el-iva-en-chile" },
+]);
+
 export const metadata: Metadata = {
   title: "¿Cuánto es el IVA en Chile? — Herramientas Online",
   description:
@@ -19,11 +32,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/cuanto-es-el-iva-en-chile",
   },
+  openGraph: {
+    title: "¿Cuánto es el IVA en Chile?",
+    description: "El IVA en Chile es 19%. Descubre a qué aplica, cuándo corresponde pagarlo y cómo calcularlo.",
+    url: "/guias/cuanto-es-el-iva-en-chile",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function CuantoEsElIvaEnChilePage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

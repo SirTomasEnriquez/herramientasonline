@@ -2,11 +2,25 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const tool = getToolBySlug("generador-link-whatsapp")!;
 const relatedGuides = GUIDES.filter((guide) =>
   ["como-hacer-link-de-whatsapp", "crear-link-whatsapp-para-instagram"].includes(guide.slug),
 );
+
+const faqs = [
+  { question: "¿El mensaje es obligatorio?", answer: "No. Si omites el parámetro ?text=, el link abre el chat vacío. Es útil cuando quieres que el cliente escriba libremente." },
+  { question: "¿Funciona con WhatsApp Business?", answer: "Sí. El link funciona igual para números personales y de WhatsApp Business." },
+  { question: "¿Cómo incluyo saltos de línea en el mensaje?", answer: "En la URL se usa %0A para representar un salto de línea. El generador los codifica automáticamente." },
+  { question: "¿El link expira?", answer: "No. Los links de wa.me no tienen fecha de vencimiento. Puedes usarlos de forma permanente." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Cómo crear un link de WhatsApp con mensaje", path: "/guias/link-whatsapp-con-mensaje" },
+]);
 
 export const metadata: Metadata = {
   title: "Cómo crear un link de WhatsApp con mensaje — Herramientas Online",
@@ -15,11 +29,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/link-whatsapp-con-mensaje",
   },
+  openGraph: {
+    title: "Cómo crear un link de WhatsApp con mensaje",
+    description: "Crea un link de WhatsApp con mensaje pre-cargado. El cliente hace clic y ya tiene el texto listo para enviar.",
+    url: "/guias/link-whatsapp-con-mensaje",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function LinkWhatsappConMensajePage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

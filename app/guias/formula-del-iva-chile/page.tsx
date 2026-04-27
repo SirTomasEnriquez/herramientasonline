@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const tool = getToolBySlug("calculadora-iva-chile")!;
 const relatedGuides = GUIDES.filter((guide) =>
@@ -12,6 +13,18 @@ const relatedGuides = GUIDES.filter((guide) =>
   ].includes(guide.slug),
 );
 
+const faqs = [
+  { question: "¿Por qué se divide por 1,19 y no por 0,19?", answer: "El bruto representa el 119% del neto. Para recuperar el 100% (neto), se divide entre 1,19. Dividir entre 0,19 daría el neto correspondiente solo al IVA, que es incorrecto." },
+  { question: "¿Estas fórmulas cambian si el IVA cambia?", answer: "Sí. Si la tasa cambia, reemplaza 0,19 por la nueva tasa y 1,19 por (1 + nueva tasa). Actualmente en Chile la tasa general es 19%." },
+  { question: "¿La calculadora usa estas mismas fórmulas?", answer: "Sí. La calculadora aplica exactamente estas fórmulas." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Fórmula del IVA en Chile", path: "/guias/formula-del-iva-chile" },
+]);
+
 export const metadata: Metadata = {
   title: "Fórmula del IVA en Chile — Herramientas Online",
   description:
@@ -19,11 +32,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/formula-del-iva-chile",
   },
+  openGraph: {
+    title: "Fórmula del IVA en Chile",
+    description: "Las dos fórmulas del IVA en Chile: calcular bruto desde neto y neto desde bruto. Referencia rápida con ejemplos.",
+    url: "/guias/formula-del-iva-chile",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function FormulaDelIvaChilePage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const tool = getToolBySlug("calculadora-iva-chile")!;
 const relatedGuides = GUIDES.filter((guide) =>
@@ -10,6 +11,19 @@ const relatedGuides = GUIDES.filter((guide) =>
   ),
 );
 
+const faqs = [
+  { question: "¿Cuál es la tasa de IVA en Chile?", answer: "19%. Lo establece el Decreto Ley N° 825 de 1974." },
+  { question: "¿El IVA se aplica sobre el precio neto o bruto?", answer: "Sobre el precio neto. El bruto es el resultado de agregar el 19% al neto." },
+  { question: "¿Todos los productos tienen IVA en Chile?", answer: "La mayoría sí. Hay excepciones para algunos servicios médicos, educación y bienes específicos exentos según el DL 825." },
+  { question: "¿Cómo verifico que el IVA en una factura es correcto?", answer: "Divide el monto bruto por 1,19 para obtener el neto. La diferencia entre bruto y neto debe ser exactamente el 19%. La calculadora hace esto automáticamente." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Cómo calcular el IVA 19% en Chile", path: "/guias/calcular-iva-19-porciento-chile" },
+]);
+
 export const metadata: Metadata = {
   title: "Cómo calcular el IVA 19% en Chile — Herramientas Online",
   description:
@@ -17,11 +31,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/calcular-iva-19-porciento-chile",
   },
+  openGraph: {
+    title: "Cómo calcular el IVA 19% en Chile",
+    description: "Aprende a calcular el IVA 19% en Chile desde monto neto o bruto. Fórmulas simples, ejemplos prácticos y calculadora gratuita.",
+    url: "/guias/calcular-iva-19-porciento-chile",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function CalcularIva19PorCientoChilePage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

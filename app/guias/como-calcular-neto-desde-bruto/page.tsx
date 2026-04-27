@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const tool = getToolBySlug("calculadora-iva-chile")!;
 const relatedGuides = GUIDES.filter((guide) =>
@@ -12,6 +13,18 @@ const relatedGuides = GUIDES.filter((guide) =>
   ].includes(guide.slug),
 );
 
+const faqs = [
+  { question: "¿Por qué se divide por 1,19 y no por 0,19?", answer: "Dividir por 0,19 daría un resultado incorrecto. El bruto equivale al 119% del neto (100% neto + 19% IVA), por eso se divide por 1,19 para recuperar el 100%." },
+  { question: "¿Hay otra forma de calcular el neto desde el bruto?", answer: "Sí: también puedes multiplicar el bruto por 0,8403 (que es 1/1,19). El resultado es el mismo." },
+  { question: "¿Esta fórmula sirve para cualquier monto?", answer: "Sí, para cualquier monto que incluya IVA del 19%. Si el IVA es diferente (por ejemplo, tasa reducida), el divisor cambia." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Cómo calcular el monto neto desde un precio bruto", path: "/guias/como-calcular-neto-desde-bruto" },
+]);
+
 export const metadata: Metadata = {
   title: "Cómo calcular el monto neto desde un precio bruto en Chile — Herramientas Online",
   description:
@@ -19,11 +32,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/como-calcular-neto-desde-bruto",
   },
+  openGraph: {
+    title: "Cómo calcular el monto neto desde un precio bruto en Chile",
+    description: "Aprende a calcular el monto neto desde un precio con IVA incluido. Fórmula simple: bruto / 1,19.",
+    url: "/guias/como-calcular-neto-desde-bruto",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function ComoCalcularNetoDesdebrutoPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

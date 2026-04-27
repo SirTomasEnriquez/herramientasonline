@@ -2,11 +2,25 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const tool = getToolBySlug("generador-link-whatsapp")!;
 const relatedGuides = GUIDES.filter((guide) =>
   ["link-whatsapp-con-mensaje", "crear-link-whatsapp-para-instagram"].includes(guide.slug),
 );
+
+const faqs = [
+  { question: "¿El link funciona aunque quien hace clic no tenga mi número guardado?", answer: "Sí. Esa es la principal ventaja del link de WhatsApp: abre el chat directamente sin necesidad de agregar el número a la agenda." },
+  { question: "¿Puedo hacer un link para WhatsApp Business?", answer: "Sí. El formato wa.me funciona igual para números personales y de WhatsApp Business." },
+  { question: "¿El link incluye el código de país automáticamente?", answer: "Si lo haces manualmente, debes incluirlo (ej. 56 para Chile). El generador incluye el código según el país que seleccionas." },
+  { question: "¿El link tiene fecha de vencimiento?", answer: "No. Los links de wa.me son permanentes." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Cómo hacer un link de WhatsApp", path: "/guias/como-hacer-link-de-whatsapp" },
+]);
 
 export const metadata: Metadata = {
   title: "Cómo hacer un link de WhatsApp — Herramientas Online",
@@ -15,11 +29,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/como-hacer-link-de-whatsapp",
   },
+  openGraph: {
+    title: "Cómo hacer un link de WhatsApp",
+    description: "Aprende a hacer un link de WhatsApp en segundos. Dos métodos: manualmente con wa.me o con el generador automático gratuito.",
+    url: "/guias/como-hacer-link-de-whatsapp",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function ComoHacerLinkDeWhatsappPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

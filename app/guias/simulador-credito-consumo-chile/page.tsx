@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const mainTool = getToolBySlug("simulador-credito")!;
 const relatedGuides = GUIDES.filter((guide) =>
@@ -10,6 +11,19 @@ const relatedGuides = GUIDES.filter((guide) =>
   ),
 );
 
+const faqs = [
+  { question: "¿Cuál es la tasa promedio de un crédito de consumo en Chile?", answer: "Las tasas varían según la institución y el perfil del solicitante. En Chile, las tasas mensuales de créditos de consumo suelen estar entre 0,8% y 3,5% mensual. Compara el CAE entre instituciones para evaluar el costo real." },
+  { question: "¿Puedo simular un crédito de consumo sin ir al banco?", answer: "Sí. Con el simulador obtienes la cuota estimada y la tabla de amortización completa ingresando el monto, la tasa y el plazo. No requiere registro ni datos personales." },
+  { question: "¿La cuota simulada es definitiva?", answer: "No. Es una estimación basada en los datos ingresados. La cuota real puede incluir seguros, comisiones y otros costos que varía según la institución." },
+  { question: "¿Cómo sé si puedo pagar la cuota?", answer: "Compara la cuota simulada con tus ingresos mensuales netos. Si la cuota supera el 30% de tus ingresos, puede comprometer tu flujo de caja." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Simulador de crédito de consumo en Chile", path: "/guias/simulador-credito-consumo-chile" },
+]);
+
 export const metadata: Metadata = {
   title: "Simulador de crédito de consumo en Chile — Herramientas Online",
   description:
@@ -17,11 +31,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/simulador-credito-consumo-chile",
   },
+  openGraph: {
+    title: "Simulador de crédito de consumo en Chile",
+    description: "Simula un crédito de consumo en Chile antes de pedirlo. Calcula la cuota mensual, el costo total y los intereses según monto, tasa y plazo.",
+    url: "/guias/simulador-credito-consumo-chile",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function SimuladorCreditoConsumoChilePage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

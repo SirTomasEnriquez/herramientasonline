@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const tool = getToolBySlug("calculadora-boleta-honorarios-chile")!;
 const relatedGuides = GUIDES.filter((guide) =>
@@ -12,6 +13,19 @@ const relatedGuides = GUIDES.filter((guide) =>
   ].includes(guide.slug),
 );
 
+const faqs = [
+  { question: "¿Cuál es la tasa de retención en 2026?", answer: "15,25% según la Ley N° 21.133. Para quienes tienen deuda del Préstamo Solidario COVID, la tasa es 18,25%." },
+  { question: "¿El impuesto retenido se pierde?", answer: "No. Queda acreditado a tu nombre y puedes usarlo al hacer la declaración anual de renta (Formulario 22)." },
+  { question: "¿Esta calculadora reemplaza asesoría contable?", answer: "No. Es una referencia para cálculos simples. Para casos con retención especial o exenciones, consulta con un contador o el SII." },
+  { question: "¿Cómo calculo cuánto debo emitir para recibir un líquido exacto?", answer: "Divide el líquido que quieres recibir por 0,8475. Ejemplo: para recibir $100.000, debes emitir $100.000 / 0,8475 ≈ $118.033." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Calcular el monto líquido de una boleta de honorarios", path: "/guias/calcular-liquido-boleta-honorarios" },
+]);
+
 export const metadata: Metadata = {
   title: "Calcular el monto líquido de una boleta de honorarios — Herramientas Online",
   description:
@@ -19,11 +33,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/calcular-liquido-boleta-honorarios",
   },
+  openGraph: {
+    title: "Calcular el monto líquido de una boleta de honorarios",
+    description: "Calcula cuánto recibirás en tu boleta de honorarios después de la retención. Tasa SII 2026: 15,25%.",
+    url: "/guias/calcular-liquido-boleta-honorarios",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function CalcularLiquidoBoletaHonorariosPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const tool = getToolBySlug("calculadora-boleta-honorarios-chile")!;
 const relatedGuides = GUIDES.filter((guide) =>
@@ -12,6 +13,18 @@ const relatedGuides = GUIDES.filter((guide) =>
   ].includes(guide.slug),
 );
 
+const faqs = [
+  { question: "¿El porcentaje se aplica sobre el monto bruto o neto?", answer: "Sobre el monto bruto de la boleta. La retención es un porcentaje fijo del total emitido." },
+  { question: "¿Quién verifica si aplica la tasa con deuda COVID?", answer: "El SII lo determina automáticamente según los registros de deuda. Si tienes dudas, revisa tu situación en el portal del SII con tu RUT y clave." },
+  { question: "¿Existe alguna retención diferente para montos pequeños?", answer: "En algunos casos específicos puede aplicar exención. Consulta con el SII o un contador si el monto de tu boleta es bajo o el pagador es persona natural." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Porcentaje de retención boleta de honorarios Chile 2026", path: "/guias/boleta-honorarios-retencion-porcentaje" },
+]);
+
 export const metadata: Metadata = {
   title: "Porcentaje de retención boleta de honorarios Chile 2026 — Herramientas Online",
   description:
@@ -19,11 +32,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/boleta-honorarios-retencion-porcentaje",
   },
+  openGraph: {
+    title: "Porcentaje de retención boleta de honorarios Chile 2026",
+    description: "El porcentaje de retención de boleta de honorarios en Chile en 2026 es 15,25% (general) o 18,25% (deuda COVID).",
+    url: "/guias/boleta-honorarios-retencion-porcentaje",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function BoletaHonorariosRetencionPorcentajePage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

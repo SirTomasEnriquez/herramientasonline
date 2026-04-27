@@ -24,6 +24,18 @@ export const metadata: Metadata = {
   title: "Calculadora de IVA Chile — Herramientas Online",
   description:
     "Calcula el IVA en Chile de forma rápida. Ingresa un monto neto o bruto y obtén el IVA 19%, el total y el valor sin impuesto.",
+  alternates: {
+    canonical: "/herramientas/calculadora-iva-chile",
+  },
+  openGraph: {
+    title: "Calculadora de IVA Chile",
+    description:
+      "Calcula el IVA 19% en Chile desde monto neto o bruto. Sin registro, sin fricción.",
+    url: "/herramientas/calculadora-iva-chile",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "website",
+  },
 };
 
 const faqs = [

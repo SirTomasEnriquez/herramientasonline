@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const mainTool = getToolBySlug("simulador-credito")!;
 const relatedTool = getToolBySlug("calculadora-iva-chile")!;
@@ -13,6 +14,19 @@ const relatedGuides = GUIDES.filter((guide) =>
   ].includes(guide.slug),
 );
 
+const faqs = [
+  { question: "¿Qué es una tabla de amortización?", answer: "Es el detalle mes a mes de cada pago: cuánto corresponde a interés, cuánto a capital y cuál es el saldo pendiente después de cada cuota." },
+  { question: "¿La cuota simulada es igual a lo que me cobrará el banco?", answer: "No necesariamente. La simulación calcula solo capital e intereses. El banco puede agregar seguros, comisiones y otros costos que aumentan la cuota real. Compara siempre el CAE para una comparación completa." },
+  { question: "¿Cuándo conviene simular antes de pedir un crédito?", answer: "Siempre. Simular te permite comparar distintos plazos, ver cómo cambia la cuota y el costo total, y verificar que el compromiso cabe en tu flujo de caja antes de firmar cualquier contrato." },
+  { question: "¿Por qué al inicio de un crédito se paga más interés?", answer: "Porque el interés se calcula sobre el saldo pendiente. Al principio debes más, así que el interés es mayor. A medida que amortizas capital, el saldo baja y el interés de cada cuota también baja — aunque la cuota total permanece igual." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Cómo simular un crédito", path: "/guias/simular-credito" },
+]);
+
 export const metadata: Metadata = {
   title: "Cómo simular un crédito — Cuota, intereses y tabla de amortización",
   description:
@@ -20,11 +34,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/simular-credito",
   },
+  openGraph: {
+    title: "Cómo simular un crédito — Cuota, intereses y tabla de amortización",
+    description: "Aprende a simular un crédito en Chile: fórmula del sistema francés, cómo leer una tabla de amortización y qué tener en cuenta antes de endeudarte.",
+    url: "/guias/simular-credito",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function SimularCreditoGuidePage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

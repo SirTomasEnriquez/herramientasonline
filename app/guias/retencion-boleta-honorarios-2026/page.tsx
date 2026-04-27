@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const mainTool = getToolBySlug("calculadora-boleta-honorarios-chile")!;
 const relatedGuides = GUIDES.filter((guide) =>
@@ -13,6 +14,19 @@ const relatedGuides = GUIDES.filter((guide) =>
   ].includes(guide.slug),
 );
 
+const faqs = [
+  { question: "¿Cuál es la retención de boleta de honorarios en 2026?", answer: "La tasa general es 15,25% según la Ley N° 21.133. Para quienes tienen deuda del Préstamo Solidario COVID, la tasa sube a 18,25%." },
+  { question: "¿Cuándo sube al 17%?", answer: "La tasa llega al 17% en 2028, según el calendario definido en la Ley N° 21.133. Entre 2026 y 2027 la tasa sigue en 15,25% y 16% respectivamente." },
+  { question: "¿Cómo sé si tengo deuda del Préstamo Solidario?", answer: "Puedes verificarlo en el portal del SII con tu RUT y clave tributaria en la sección de Préstamo Solidario. Si tienes deuda, tu retención será 18,25% hasta saldarla." },
+  { question: "¿Por qué el cálculo es referencial?", answer: "Porque la tasa puede cambiar por normativas futuras, y algunas situaciones particulares tienen reglas distintas. Para decisiones tributarias importantes, consulta con un contador o con el SII." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Retención de boleta de honorarios 2026", path: "/guias/retencion-boleta-honorarios-2026" },
+]);
+
 export const metadata: Metadata = {
   title: "Retención de boleta de honorarios 2026 — Tasa, fórmula y ejemplos",
   description:
@@ -20,11 +34,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/retencion-boleta-honorarios-2026",
   },
+  openGraph: {
+    title: "Retención de boleta de honorarios 2026 — Tasa, fórmula y ejemplos",
+    description: "La retención de boleta de honorarios en Chile 2026 es 15,25% (Ley 21.133). Fórmula para calcular líquido desde bruto y bruto desde líquido.",
+    url: "/guias/retencion-boleta-honorarios-2026",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function RetencionBoletaHonorarios2026GuidePage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

@@ -2,11 +2,24 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const tool = getToolBySlug("generador-link-whatsapp")!;
 const relatedGuides = GUIDES.filter((guide) =>
   ["como-hacer-link-de-whatsapp", "link-whatsapp-con-mensaje"].includes(guide.slug),
 );
+
+const faqs = [
+  { question: "¿Es gratis el generador de link de WhatsApp?", answer: "Sí. El generador es completamente gratuito y no requiere registro ni datos personales." },
+  { question: "¿Funciona para WhatsApp Business?", answer: "Sí. El link generado funciona igual para cuentas personales y cuentas de WhatsApp Business." },
+  { question: "¿Qué es wa.me?", answer: "Es el dominio oficial de WhatsApp para links directos de chat. Al acceder a un link wa.me, el dispositivo abre automáticamente WhatsApp con el número y mensaje indicados." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "WhatsApp Link Generator", path: "/guias/whatsapp-link-generator" },
+]);
 
 export const metadata: Metadata = {
   title: "WhatsApp Link Generator — Generador de link de WhatsApp gratis",
@@ -15,11 +28,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/whatsapp-link-generator",
   },
+  openGraph: {
+    title: "WhatsApp Link Generator — Generador de link de WhatsApp gratis",
+    description: "Free WhatsApp link generator for Chile and Latin America. Create a direct WhatsApp chat link with optional message.",
+    url: "/guias/whatsapp-link-generator",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function WhatsappLinkGeneratorPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

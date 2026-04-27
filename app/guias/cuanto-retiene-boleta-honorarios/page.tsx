@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const tool = getToolBySlug("calculadora-boleta-honorarios-chile")!;
 const relatedGuides = GUIDES.filter((guide) =>
@@ -12,6 +13,18 @@ const relatedGuides = GUIDES.filter((guide) =>
   ].includes(guide.slug),
 );
 
+const faqs = [
+  { question: "¿Cómo sé si tengo deuda del Préstamo Solidario COVID?", answer: "Puedes verificar tu saldo en el sitio oficial del SII con tu RUT y clave tributaria. Si hay deuda activa, la retención aumenta en 3 puntos porcentuales." },
+  { question: "¿La retención aplica siempre?", answer: "No en todos los casos. Boletas emitidas a personas naturales que no llevan contabilidad pueden estar exentas. Verifica con el SII si tu caso aplica." },
+  { question: "¿La tasa cambia cada año?", answer: "La tasa fue subiendo paulatinamente desde 2017. Desde 2023 se estabilizó en 15,25% para el caso general según la Ley N° 21.133." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "¿Cuánto retiene la boleta de honorarios?", path: "/guias/cuanto-retiene-boleta-honorarios" },
+]);
+
 export const metadata: Metadata = {
   title: "¿Cuánto retiene la boleta de honorarios en Chile? — Herramientas Online",
   description:
@@ -19,11 +32,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/cuanto-retiene-boleta-honorarios",
   },
+  openGraph: {
+    title: "¿Cuánto retiene la boleta de honorarios en Chile?",
+    description: "La retención de boleta de honorarios en Chile en 2026 es 15,25% (general) o 18,25% (con deuda COVID).",
+    url: "/guias/cuanto-retiene-boleta-honorarios",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function CuantoRetieneBoletaHonorariosPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

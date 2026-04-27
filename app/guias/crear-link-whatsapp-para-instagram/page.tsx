@@ -2,11 +2,24 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const tool = getToolBySlug("generador-link-whatsapp")!;
 const relatedGuides = GUIDES.filter((guide) =>
   ["link-whatsapp-con-mensaje", "como-hacer-link-de-whatsapp"].includes(guide.slug),
 );
+
+const faqs = [
+  { question: "¿El link de WhatsApp funciona desde la bio de Instagram?", answer: "Sí. Instagram permite un link en la bio. Al tocar el link, el sistema operativo detecta el dominio wa.me y abre WhatsApp automáticamente." },
+  { question: "¿Puedo poner el link en las publicaciones también?", answer: "Instagram no permite links clicables en los captions de publicaciones del feed. La opción más efectiva es la bio, el sticker de link en Stories, o el botón de contacto en cuentas de empresa." },
+  { question: "¿Funciona para cuentas personales y de empresa?", answer: "Sí. El link de WhatsApp funciona independientemente del tipo de cuenta de Instagram que tengas." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Crear link de WhatsApp para Instagram", path: "/guias/crear-link-whatsapp-para-instagram" },
+]);
 
 export const metadata: Metadata = {
   title: "Crear link de WhatsApp para Instagram — Herramientas Online",
@@ -15,11 +28,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/crear-link-whatsapp-para-instagram",
   },
+  openGraph: {
+    title: "Crear link de WhatsApp para Instagram",
+    description: "Aprende a poner un link de WhatsApp en tu bio de Instagram para recibir consultas directo al chat.",
+    url: "/guias/crear-link-whatsapp-para-instagram",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function CrearLinkWhatsappParaInstagramPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const mainTool = getToolBySlug("calculadora-iva-chile")!;
 const relatedGuides = GUIDES.filter((guide) =>
@@ -13,6 +14,19 @@ const relatedGuides = GUIDES.filter((guide) =>
   ].includes(guide.slug),
 );
 
+const faqs = [
+  { question: "¿Qué es un monto neto?", answer: "Es el valor del bien o servicio antes de agregar IVA. En las facturas chilenas es la base imponible sobre la que se calcula el 19%." },
+  { question: "¿Cómo calculo el IVA desde el neto?", answer: "Multiplica el monto neto por 0,19 para obtener el IVA, o por 1,19 para obtener directamente el total bruto." },
+  { question: "¿El total bruto siempre es neto más IVA?", answer: "Para operaciones afectas al IVA general del 19%, sí. Existen tasas diferenciadas y exenciones en casos específicos — en esos casos el IVA puede ser distinto o no aplica." },
+  { question: "¿Esta guía reemplaza asesoría contable?", answer: "No. Es una referencia para cálculos estándar. Para situaciones con exenciones, créditos fiscales, regímenes especiales o declaraciones complejas, consulta con un contador o con el SII." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Cómo calcular IVA desde un monto neto", path: "/guias/calcular-iva-desde-monto-neto" },
+]);
+
 export const metadata: Metadata = {
   title: "Cómo calcular IVA desde un monto neto en Chile — Fórmula y ejemplos",
   description:
@@ -20,11 +34,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/calcular-iva-desde-monto-neto",
   },
+  openGraph: {
+    title: "Cómo calcular IVA desde un monto neto en Chile",
+    description: "Aprende a calcular el IVA 19% y el monto bruto desde un valor neto. Fórmula, tabla de ejemplos y cuándo usarla.",
+    url: "/guias/calcular-iva-desde-monto-neto",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function CalcularIvaDesdeMontoNetoGuidePage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const tool = getToolBySlug("calculadora-iva-chile")!;
 const relatedGuides = GUIDES.filter((guide) =>
@@ -10,6 +11,18 @@ const relatedGuides = GUIDES.filter((guide) =>
   ),
 );
 
+const faqs = [
+  { question: "¿Por qué se multiplica por 1,19 y no por 0,19?", answer: "Multiplicar por 0,19 entrega solo el valor del IVA. Multiplicar por 1,19 entrega el total (neto + IVA) en un solo paso." },
+  { question: "¿Cómo calculo el IVA por separado?", answer: "Multiplica el neto por 0,19. Ejemplo: $50.000 × 0,19 = $9.500 de IVA." },
+  { question: "¿El precio publicado en Chile incluye IVA?", answer: "Sí. En Chile los precios al consumidor deben incluir IVA según la Ley del Consumidor. Las facturas entre empresas suelen mostrar neto e IVA por separado." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Cómo calcular el precio con IVA incluido", path: "/guias/como-calcular-precio-con-iva" },
+]);
+
 export const metadata: Metadata = {
   title: "Cómo calcular el precio con IVA incluido en Chile — Herramientas Online",
   description:
@@ -17,11 +30,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/como-calcular-precio-con-iva",
   },
+  openGraph: {
+    title: "Cómo calcular el precio con IVA incluido en Chile",
+    description: "Calcula el precio con IVA incluido en Chile. Multiplica el neto por 1,19 y obtén el total con IVA 19% en segundos.",
+    url: "/guias/como-calcular-precio-con-iva",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function ComoCalcularPrecioConIvaPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const tool = getToolBySlug("calculadora-boleta-honorarios-chile")!;
 const relatedGuides = GUIDES.filter((guide) =>
@@ -12,6 +13,18 @@ const relatedGuides = GUIDES.filter((guide) =>
   ].includes(guide.slug),
 );
 
+const faqs = [
+  { question: "¿Qué pasa si cobro a una persona natural sin contabilidad?", answer: "En ese caso la boleta puede estar exenta de retención. El pagador no retiene el impuesto. Verifica con el SII o un contador si aplica a tu situación." },
+  { question: "¿El impuesto retenido lo pierdo?", answer: "No. Queda registrado a tu nombre y lo recuperas o descuentas en tu declaración anual de renta del Formulario 22." },
+  { question: "¿Puedo emitir la boleta con decimales?", answer: "El SII suele trabajar con montos enteros en pesos. Redondea al peso más cercano al emitir. La calculadora muestra el valor exacto antes del redondeo." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Cómo calcular el líquido de una boleta de honorarios", path: "/guias/como-calcular-boleta-honorarios-liquido" },
+]);
+
 export const metadata: Metadata = {
   title: "Cómo calcular el líquido de una boleta de honorarios — Herramientas Online",
   description:
@@ -19,11 +32,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/como-calcular-boleta-honorarios-liquido",
   },
+  openGraph: {
+    title: "Cómo calcular el líquido de una boleta de honorarios",
+    description: "Calcula el monto líquido de una boleta de honorarios y cuánto debes emitir para recibir un pago exacto.",
+    url: "/guias/como-calcular-boleta-honorarios-liquido",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function ComoCalcularBoletaHonorariosLiquidoPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

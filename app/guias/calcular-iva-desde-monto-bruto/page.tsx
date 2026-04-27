@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const mainTool = getToolBySlug("calculadora-iva-chile")!;
 const relatedGuides = GUIDES.filter((guide) =>
@@ -13,6 +14,19 @@ const relatedGuides = GUIDES.filter((guide) =>
   ].includes(guide.slug),
 );
 
+const faqs = [
+  { question: "¿Qué es un monto bruto?", answer: "Es el precio final con IVA incluido. En Chile, las facturas electrónicas siempre muestran el monto neto, el IVA y el total (bruto) por separado." },
+  { question: "¿Por qué divido por 1,19 y no por 0,19?", answer: "Porque el bruto equivale al neto multiplicado por 1,19 (neto + 19% de neto). Para revertir esa operación, divides por 1,19. Dividir por 0,19 daría un resultado completamente diferente y erróneo." },
+  { question: "¿Cuándo conviene calcular desde bruto?", answer: "Cuando recibes una factura, un precio de retail o cualquier monto que ya incluye el IVA y necesitas separar la base imponible del impuesto." },
+  { question: "¿El resultado siempre es exacto?", answer: "En la mayoría de los casos sí, pero puede haber diferencias de $1 por redondeo. El SII acepta estas diferencias mínimas en las declaraciones. Para montos grandes, verifica con la calculadora y compara con el documento original." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Cómo calcular IVA desde un monto bruto", path: "/guias/calcular-iva-desde-monto-bruto" },
+]);
+
 export const metadata: Metadata = {
   title: "Cómo calcular IVA desde un monto bruto en Chile — Fórmula y ejemplos",
   description:
@@ -20,11 +34,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/calcular-iva-desde-monto-bruto",
   },
+  openGraph: {
+    title: "Cómo calcular IVA desde un monto bruto en Chile",
+    description: "Aprende a separar el monto neto y el IVA 19% desde un precio con IVA incluido. Fórmula, ejemplos y error frecuente a evitar.",
+    url: "/guias/calcular-iva-desde-monto-bruto",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function CalcularIvaDesdeMontoBrutoGuidePage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

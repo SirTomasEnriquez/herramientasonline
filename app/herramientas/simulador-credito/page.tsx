@@ -26,6 +26,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/herramientas/simulador-credito",
   },
+  openGraph: {
+    title: "Simulador de Crédito en Chile con Tabla de Amortización",
+    description:
+      "Ingresa monto, tasa y plazo y obtén la cuota mensual y la tabla completa de amortización. Sin registro.",
+    url: "/herramientas/simulador-credito",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "website",
+  },
 };
 
 const faqs = [

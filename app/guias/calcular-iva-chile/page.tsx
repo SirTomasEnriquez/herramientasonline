@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const mainTool = getToolBySlug("calculadora-iva-chile")!;
 const relatedTool = getToolBySlug("calculadora-boleta-honorarios-chile")!;
@@ -15,6 +16,19 @@ const relatedGuides = GUIDES.filter((guide) =>
   ].includes(guide.slug),
 );
 
+const faqs = [
+  { question: "¿Cuál es el IVA en Chile?", answer: "El IVA general en Chile es 19%, establecido en el Decreto Ley 825. No ha cambiado desde 2003 cuando subió desde 18%." },
+  { question: "¿Qué diferencia hay entre monto neto y monto bruto?", answer: "El monto neto es el valor sin IVA. El monto bruto es el total que incluye el IVA. En una factura chilena siempre aparecen los tres: neto, IVA y bruto." },
+  { question: "¿Por qué no multiplico el bruto por 0,19 para obtener el IVA?", answer: "Porque el 19% se aplica sobre el neto, no sobre el bruto. Si multiplicas el bruto por 0,19 obtienes un valor mayor al IVA real. La fórmula correcta desde bruto es dividir por 1,19 primero para extraer el neto, y luego restar." },
+  { question: "¿Esta guía reemplaza asesoría contable?", answer: "No. Es una guía de referencia para cálculos estándar. Para operaciones con exenciones, créditos fiscales o regímenes tributarios especiales, consulta con un contador o con el SII." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Cómo calcular IVA en Chile", path: "/guias/calcular-iva-chile" },
+]);
+
 export const metadata: Metadata = {
   title: "Cómo calcular IVA en Chile — Guía con fórmulas y ejemplos",
   description:
@@ -22,11 +36,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/calcular-iva-chile",
   },
+  openGraph: {
+    title: "Cómo calcular IVA en Chile — Guía con fórmulas y ejemplos",
+    description: "Aprende a calcular el IVA 19% en Chile: fórmulas desde monto neto y desde monto bruto, con ejemplos reales y tabla de referencia.",
+    url: "/guias/calcular-iva-chile",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function CalcularIvaChileGuidePage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

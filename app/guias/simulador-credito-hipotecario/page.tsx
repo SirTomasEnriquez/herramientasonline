@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const mainTool = getToolBySlug("simulador-credito")!;
 const relatedGuides = GUIDES.filter((guide) =>
@@ -10,6 +11,19 @@ const relatedGuides = GUIDES.filter((guide) =>
   ),
 );
 
+const faqs = [
+  { question: "¿Cuánto es la cuota de un crédito hipotecario en Chile?", answer: "Depende del monto, la tasa y el plazo. Como referencia, un crédito de $80.000.000 a 20 años con tasa mensual de 0,45% resulta en una cuota de aproximadamente $510.000 mensuales, sin considerar seguros." },
+  { question: "¿Conviene pedir un crédito a 20 o 30 años?", answer: "A mayor plazo, menor cuota mensual pero mayor costo total en intereses. La simulación permite comparar ambas opciones con los mismos datos para tomar la decisión según tu capacidad de pago." },
+  { question: "¿Puedo simular en UF?", answer: "El simulador trabaja con el monto ingresado. Puedes convertir UF a pesos al valor del día e ingresar el equivalente para estimar la cuota en pesos." },
+  { question: "¿El simulador incluye los seguros?", answer: "No. El simulador calcula la cuota de capital e intereses únicamente. Los seguros de desgravamen e incendio se suman a la cuota real y varían por institución." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Simulador de crédito hipotecario en Chile", path: "/guias/simulador-credito-hipotecario" },
+]);
+
 export const metadata: Metadata = {
   title: "Simulador de crédito hipotecario en Chile — Herramientas Online",
   description:
@@ -17,11 +31,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/simulador-credito-hipotecario",
   },
+  openGraph: {
+    title: "Simulador de crédito hipotecario en Chile",
+    description: "Simula un crédito hipotecario en Chile. Calcula la cuota mensual, el total de intereses y la tabla de amortización por monto, tasa y plazo.",
+    url: "/guias/simulador-credito-hipotecario",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function SimuladorCreditoHipotecarioPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

@@ -23,6 +23,18 @@ export const metadata: Metadata = {
   title: "Calculadora de Boleta de Honorarios Chile 2026 — Herramientas Online",
   description:
     "Calcula tu boleta de honorarios con la tasa oficial del SII 2026: 15,25% según Ley 21.133. Desde bruto o desde líquido. Incluye el caso del Préstamo Solidario COVID.",
+  alternates: {
+    canonical: "/herramientas/calculadora-boleta-honorarios-chile",
+  },
+  openGraph: {
+    title: "Calculadora de Boleta de Honorarios Chile 2026",
+    description:
+      "Calcula tu boleta de honorarios con tasa SII 2026: 15,25%. Desde bruto o desde líquido. Sin registro.",
+    url: "/herramientas/calculadora-boleta-honorarios-chile",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "website",
+  },
 };
 
 const faqs = [

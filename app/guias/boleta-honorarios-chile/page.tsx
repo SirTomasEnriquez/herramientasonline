@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const mainTool = getToolBySlug("calculadora-boleta-honorarios-chile")!;
 const relatedTool = getToolBySlug("calculadora-iva-chile")!;
@@ -14,6 +15,19 @@ const relatedGuides = GUIDES.filter((guide) =>
   ].includes(guide.slug),
 );
 
+const faqs = [
+  { question: "¿Cuál es la retención de boleta de honorarios en Chile 2026?", answer: "La tasa general es 15,25% según la Ley N° 21.133. Para quienes tienen deuda del Préstamo Solidario COVID, la tasa sube a 18,25%." },
+  { question: "¿Qué diferencia hay entre monto bruto y monto líquido?", answer: "El monto bruto es el total de la boleta. El monto líquido es lo que efectivamente recibes después de descontar la retención de impuesto." },
+  { question: "¿El impuesto retenido se pierde?", answer: "No. Queda acreditado a tu nombre y se descuenta en tu declaración anual de renta. Dependiendo de tu nivel de ingresos, puede darte derecho a devolución." },
+  { question: "¿Esta calculadora reemplaza asesoría contable?", answer: "No. Sirve para cálculos referenciales con la tasa oficial SII 2026. Para resolver casos con retenciones especiales o situaciones tributarias particulares, consulta con un contador." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Cómo calcular una boleta de honorarios en Chile", path: "/guias/boleta-honorarios-chile" },
+]);
+
 export const metadata: Metadata = {
   title: "Cómo calcular una boleta de honorarios en Chile — Guía 2026",
   description:
@@ -21,11 +35,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/boleta-honorarios-chile",
   },
+  openGraph: {
+    title: "Cómo calcular una boleta de honorarios en Chile",
+    description: "Aprende a calcular el monto bruto, la retención y el monto líquido de una boleta de honorarios en Chile con la tasa SII 2026: 15,25%.",
+    url: "/guias/boleta-honorarios-chile",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function BoletaHonorariosChileGuidePage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

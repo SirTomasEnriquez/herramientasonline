@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { getToolBySlug } from "@/lib/tools";
+import { buildGuidePageSchema, stringifyJsonLd } from "@/lib/schema";
 
 const mainTool = getToolBySlug("simulador-credito")!;
 const relatedGuides = GUIDES.filter((guide) =>
@@ -12,6 +13,19 @@ const relatedGuides = GUIDES.filter((guide) =>
   ].includes(guide.slug),
 );
 
+const faqs = [
+  { question: "¿Qué es el sistema francés?", answer: "Es el método de amortización más usado en Chile. La cuota mensual es fija durante todo el crédito. Al principio pagas más intereses; al final, más capital." },
+  { question: "¿Por qué cambia la cuota si la tasa es fija?", answer: "La cuota no cambia: siempre es el mismo valor. Lo que cambia internamente es cuánto de esa cuota va a intereses y cuánto a capital. Eso lo muestra la tabla de amortización." },
+  { question: "¿Cómo reducir el costo total de un crédito?", answer: "Puedes acortar el plazo (cuota más alta, menos intereses totales) o hacer prepagos de capital cuando tengas liquidez. Verifica antes si tu crédito tiene comisión de prepago." },
+  { question: "¿El simulador calcula créditos en UF?", answer: "El simulador trabaja con el monto que ingresas. Puedes convertir UF a pesos al valor del día y usar la tasa mensual en pesos para estimar la cuota equivalente." },
+];
+
+const guideSchema = buildGuidePageSchema(faqs, [
+  { name: "Inicio", path: "/" },
+  { name: "Guías", path: "/guias" },
+  { name: "Cómo calcular la cuota de un crédito", path: "/guias/como-calcular-cuota-credito" },
+]);
+
 export const metadata: Metadata = {
   title: "Cómo calcular la cuota de un crédito — Herramientas Online",
   description:
@@ -19,11 +33,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/guias/como-calcular-cuota-credito",
   },
+  openGraph: {
+    title: "Cómo calcular la cuota de un crédito",
+    description: "Aprende a calcular la cuota mensual de un crédito con la fórmula del sistema francés. Incluye ejemplo paso a paso y simulador gratuito.",
+    url: "/guias/como-calcular-cuota-credito",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "article",
+  },
 };
 
 export default function ComoCalcularCuotaCreditoPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(guideSchema) }}
+      />
       <article className="max-w-2xl mx-auto prose prose-gray prose-sm sm:prose-base">
         <p className="text-sm font-semibold text-green-600 mb-3">Guía útil</p>
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">

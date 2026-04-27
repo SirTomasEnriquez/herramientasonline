@@ -132,6 +132,13 @@ export function buildToolPageSchema(
   ].filter((schema): schema is JsonLd => schema !== null);
 }
 
+export function buildGuidePageSchema(faqs: FaqItem[], breadcrumbs: BreadcrumbItem[]) {
+  return [
+    buildFAQPageSchema(faqs),
+    buildBreadcrumbSchema(breadcrumbs),
+  ].filter((schema): schema is JsonLd => schema !== null);
+}
+
 export function stringifyJsonLd(schema: JsonLd | JsonLd[]) {
   return JSON.stringify(schema).replace(/</g, "\\u003c");
 }

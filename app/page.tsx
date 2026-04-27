@@ -6,6 +6,18 @@ export const metadata: Metadata = {
   title: "Herramientas Online — Herramientas simples para tareas reales",
   description:
     "Herramientas gratuitas para emprendedores y trabajo diario. Calcula IVA, boletas de honorarios, genera links de WhatsApp y más. Sin registro.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Herramientas Online — Herramientas simples para tareas reales",
+    description:
+      "Herramientas gratuitas para emprendedores y trabajo diario. Sin registro, sin fricción.",
+    url: "/",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "website",
+  },
 };
 
 export default function Home() {
