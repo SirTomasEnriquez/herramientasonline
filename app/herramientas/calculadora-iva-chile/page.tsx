@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import IvaChileCalculator from "@/components/IvaChileCalculator";
 import RelatedTools from "@/components/RelatedTools";
+import { getGuideBySlug } from "@/lib/guides";
 import { buildToolPageSchema, stringifyJsonLd } from "@/lib/schema";
-import { getToolBySlug } from "@/lib/tools";
+import { TOOLS, getToolBySlug } from "@/lib/tools";
 
 const tool = getToolBySlug("calculadora-iva-chile")!;
+const relatedGuide = getGuideBySlug("calcular-iva-chile")!;
+const relatedTools = TOOLS.filter((item) =>
+  ["calculadora-boleta-honorarios-chile", "simulador-credito"].includes(item.slug),
+);
 
 export const metadata: Metadata = {
   title: "Calculadora de IVA Chile — Herramientas Online",
@@ -112,6 +118,24 @@ export default function CalculadoraIvaChilePage() {
             </p>
           </div>
         </div>
+      </section>
+
+      <section className="max-w-2xl mx-auto mt-10 prose prose-gray prose-sm sm:prose-base">
+        <h2>Guías relacionadas</h2>
+        <ul>
+          <li>
+            <Link href={relatedGuide.href}>{relatedGuide.title}</Link>
+          </li>
+        </ul>
+
+        <h2>Otras herramientas</h2>
+        <ul>
+          {relatedTools.map((relatedTool) => (
+            <li key={relatedTool.slug}>
+              <Link href={relatedTool.href}>{relatedTool.title}</Link>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <RelatedTools currentHref="/herramientas/calculadora-iva-chile" />

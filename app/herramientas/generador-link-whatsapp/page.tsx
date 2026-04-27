@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import WhatsAppLinkGenerator from "@/components/WhatsAppLinkGenerator";
 import RelatedTools from "@/components/RelatedTools";
+import { GUIDES } from "@/lib/guides";
 import { buildToolPageSchema, stringifyJsonLd } from "@/lib/schema";
-import { getToolBySlug } from "@/lib/tools";
+import { TOOLS, getToolBySlug } from "@/lib/tools";
 
 const PAGE_PATH = "/herramientas/generador-link-whatsapp";
 const tool = getToolBySlug("generador-link-whatsapp")!;
+const relatedGuides = GUIDES.filter((guide) =>
+  ["calcular-iva-chile", "boleta-honorarios-chile"].includes(guide.slug),
+);
+const relatedTools = TOOLS.filter((item) =>
+  ["calculadora-iva-chile", "calculadora-boleta-honorarios-chile"].includes(item.slug),
+);
 
 export const metadata: Metadata = {
   title: "Generador de link de WhatsApp gratis — Herramientas Online",
@@ -208,6 +216,26 @@ export default function GeneradorLinkWhatsAppPage() {
             </p>
           </div>
         </div>
+      </section>
+
+      <section className="max-w-2xl mx-auto mt-10 prose prose-gray prose-sm sm:prose-base">
+        <h2>Guías relacionadas</h2>
+        <ul>
+          {relatedGuides.map((guide) => (
+            <li key={guide.slug}>
+              <Link href={guide.href}>{guide.title}</Link>
+            </li>
+          ))}
+        </ul>
+
+        <h2>Otras herramientas</h2>
+        <ul>
+          {relatedTools.map((relatedTool) => (
+            <li key={relatedTool.slug}>
+              <Link href={relatedTool.href}>{relatedTool.title}</Link>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <RelatedTools currentHref="/herramientas/generador-link-whatsapp" />

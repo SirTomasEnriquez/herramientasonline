@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GUIDES } from "@/lib/guides";
+import { getToolBySlug } from "@/lib/tools";
+
+const mainTool = getToolBySlug("calculadora-boleta-honorarios-chile")!;
+const relatedTool = getToolBySlug("calculadora-iva-chile")!;
+const relatedGuides = GUIDES.filter((guide) =>
+  ["calcular-iva-chile", "simular-credito"].includes(guide.slug),
+);
 
 export const metadata: Metadata = {
   title: "Cómo calcular una boleta de honorarios en Chile — Herramientas Online",
@@ -50,7 +58,7 @@ export default function BoletaHonorariosChileGuidePage() {
 
         <p>
           <Link
-            href="/herramientas/calculadora-boleta-honorarios-chile"
+            href={mainTool.href}
             className="inline-flex text-sm font-medium text-green-600 hover:text-green-700"
           >
             Usar calculadora de boleta de honorarios →
@@ -73,13 +81,19 @@ export default function BoletaHonorariosChileGuidePage() {
           </div>
         </div>
 
+        <h2>También te puede servir</h2>
+        <ul>
+          {relatedGuides.map((guide) => (
+            <li key={guide.slug}>
+              <Link href={guide.href}>{guide.title}</Link>
+            </li>
+          ))}
+        </ul>
+
         <h2>Links relacionados</h2>
         <ul>
           <li>
-            <Link href="/herramientas/calculadora-iva-chile">Calculadora de IVA Chile</Link>
-          </li>
-          <li>
-            <Link href="/guias/calcular-iva-chile">Cómo calcular IVA en Chile</Link>
+            <Link href={relatedTool.href}>{relatedTool.title}</Link>
           </li>
           <li>
             <Link href="/herramientas">Ver herramientas disponibles</Link>

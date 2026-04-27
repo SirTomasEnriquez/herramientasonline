@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import BoletaHonorariosCalculator from "@/components/BoletaHonorariosCalculator";
 import RelatedTools from "@/components/RelatedTools";
+import { getGuideBySlug } from "@/lib/guides";
 import { buildToolPageSchema, stringifyJsonLd } from "@/lib/schema";
-import { getToolBySlug } from "@/lib/tools";
+import { TOOLS, getToolBySlug } from "@/lib/tools";
 
 const tool = getToolBySlug("calculadora-boleta-honorarios-chile")!;
+const relatedGuide = getGuideBySlug("boleta-honorarios-chile")!;
+const relatedTools = TOOLS.filter((item) =>
+  ["calculadora-iva-chile", "simulador-credito"].includes(item.slug),
+);
 
 export const metadata: Metadata = {
   title: "Calculadora de Boleta de Honorarios Chile 2026 — Herramientas Online",
@@ -144,6 +150,24 @@ export default function CalculadoraBoletaHonorariosPage() {
             </p>
           </div>
         </div>
+      </section>
+
+      <section className="max-w-2xl mx-auto mt-10 prose prose-gray prose-sm sm:prose-base">
+        <h2>Guías relacionadas</h2>
+        <ul>
+          <li>
+            <Link href={relatedGuide.href}>{relatedGuide.title}</Link>
+          </li>
+        </ul>
+
+        <h2>Otras herramientas</h2>
+        <ul>
+          {relatedTools.map((relatedTool) => (
+            <li key={relatedTool.slug}>
+              <Link href={relatedTool.href}>{relatedTool.title}</Link>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <RelatedTools currentHref="/herramientas/calculadora-boleta-honorarios-chile" />
