@@ -40,6 +40,9 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://herramientasonline.cl"),
   title: "Herramientas Online — Herramientas para emprendedores",
   description: "Micro-herramientas web gratuitas para emprendedores. Sin registro, sin fricción.",
+  verification: {
+    google: "PQnU3XF7E8OE0-tZzCiZUn2caKYGmqg72unIzvpUbBA",
+  },
 };
 
 export default function RootLayout({
