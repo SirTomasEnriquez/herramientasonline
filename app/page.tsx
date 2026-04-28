@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { TOOLS } from "@/lib/tools";
+import { GUIDES } from "@/lib/guides";
+
+const featuredGuides = GUIDES.filter((g) =>
+  ["calcular-iva-chile", "boleta-honorarios-chile", "simular-credito", "como-hacer-link-de-whatsapp"].includes(g.slug),
+);
 
 export const metadata: Metadata = {
   title: "Herramientas Online — Herramientas simples para tareas reales",
@@ -85,6 +90,37 @@ export default function Home() {
           className="text-sm font-medium text-green-600 hover:text-green-700 transition-colors"
         >
           Ver todas las herramientas →
+        </Link>
+
+        {/* Guides section */}
+        <div className="mt-14 mb-8">
+          <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">
+            Guías y tutoriales
+          </h2>
+          <div className="space-y-3">
+            {featuredGuides.map((guide) => (
+              <Link
+                key={guide.href}
+                href={guide.href}
+                className="flex items-center justify-between bg-white rounded-xl border border-gray-100 px-5 py-4 hover:border-green-200 hover:shadow-sm transition-all group"
+              >
+                <div>
+                  <p className="text-sm font-semibold text-gray-900 group-hover:text-green-600 transition-colors">
+                    {guide.title}
+                  </p>
+                  <p className="text-sm text-gray-500 mt-0.5">{guide.description}</p>
+                </div>
+                <span className="text-gray-300 group-hover:text-green-400 transition-colors ml-4 shrink-0">→</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <Link
+          href="/guias"
+          className="text-sm font-medium text-green-600 hover:text-green-700 transition-colors"
+        >
+          Ver todas las guías →
         </Link>
       </div>
     </main>
