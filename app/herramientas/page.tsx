@@ -7,6 +7,17 @@ export const metadata: Metadata = {
   title: "Herramientas disponibles — Herramientas Online",
   description:
     "Herramientas diseñadas para resolver cálculos y tareas comunes de forma rápida. Sin registro, sin fricción.",
+  alternates: {
+    canonical: "/herramientas",
+  },
+  openGraph: {
+    title: "Herramientas disponibles — Herramientas Online",
+    description: "Herramientas diseñadas para resolver cálculos y tareas comunes de forma rápida. Sin registro, sin fricción.",
+    url: "/herramientas",
+    siteName: "Herramientas Online",
+    locale: "es_CL",
+    type: "website",
+  },
 };
 
 export default function HerramientasPage() {

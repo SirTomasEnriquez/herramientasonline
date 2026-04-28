@@ -48,6 +48,140 @@
       "purpose": "Crear enlaces directos de WhatsApp sin registro."
     }
   ],
+  "guides": [
+    {
+      "title": "Cómo calcular IVA en Chile",
+      "url": "https://herramientasonline.cl/guias/calcular-iva-chile",
+      "cluster": "IVA Chile",
+      "purpose": "Explica monto neto, IVA 19% y monto bruto con fórmulas y ejemplos."
+    },
+    {
+      "title": "Cómo calcular IVA desde un monto bruto",
+      "url": "https://herramientasonline.cl/guias/calcular-iva-desde-monto-bruto",
+      "cluster": "IVA Chile",
+      "purpose": "Convierte un total con IVA en monto neto e IVA separado usando la fórmula dividir por 1,19."
+    },
+    {
+      "title": "Cómo calcular IVA desde un monto neto",
+      "url": "https://herramientasonline.cl/guias/calcular-iva-desde-monto-neto",
+      "cluster": "IVA Chile",
+      "purpose": "Calcula el IVA 19% y el total bruto desde un valor neto multiplicando por 1,19."
+    },
+    {
+      "title": "Cómo calcular el IVA 19% en Chile",
+      "url": "https://herramientasonline.cl/guias/calcular-iva-19-porciento-chile",
+      "cluster": "IVA Chile",
+      "purpose": "Fórmulas para calcular IVA 19% desde neto o desde bruto, con ejemplos y tabla."
+    },
+    {
+      "title": "Cómo calcular el precio con IVA incluido",
+      "url": "https://herramientasonline.cl/guias/como-calcular-precio-con-iva",
+      "cluster": "IVA Chile",
+      "purpose": "Explica cómo obtener el precio final con IVA incluido multiplicando el neto por 1,19."
+    },
+    {
+      "title": "Cómo calcular el monto neto desde un precio bruto",
+      "url": "https://herramientasonline.cl/guias/como-calcular-neto-desde-bruto",
+      "cluster": "IVA Chile",
+      "purpose": "Extrae el neto y el IVA desde un precio que ya incluye el impuesto."
+    },
+    {
+      "title": "¿Cuánto es el IVA en Chile?",
+      "url": "https://herramientasonline.cl/guias/cuanto-es-el-iva-en-chile",
+      "cluster": "IVA Chile",
+      "purpose": "El IVA en Chile es 19%. Explica qué aplica, qué está exento y cómo calcularlo."
+    },
+    {
+      "title": "Fórmula del IVA en Chile",
+      "url": "https://herramientasonline.cl/guias/formula-del-iva-chile",
+      "cluster": "IVA Chile",
+      "purpose": "Las dos fórmulas del IVA chileno: neto a bruto y bruto a neto, con tabla de referencia."
+    },
+    {
+      "title": "Cómo calcular una boleta de honorarios",
+      "url": "https://herramientasonline.cl/guias/boleta-honorarios-chile",
+      "cluster": "Boleta de Honorarios",
+      "purpose": "Explica monto bruto, retención (15,25% en 2026) y monto líquido con fórmulas y ejemplos."
+    },
+    {
+      "title": "Retención de boleta de honorarios 2026",
+      "url": "https://herramientasonline.cl/guias/retencion-boleta-honorarios-2026",
+      "cluster": "Boleta de Honorarios",
+      "purpose": "Tasa de retención 2026 (15,25% general, 18,25% con deuda COVID), fórmula y evolución histórica."
+    },
+    {
+      "title": "Calcular el monto líquido de una boleta de honorarios",
+      "url": "https://herramientasonline.cl/guias/calcular-liquido-boleta-honorarios",
+      "cluster": "Boleta de Honorarios",
+      "purpose": "Fórmula para calcular el líquido desde el bruto con la tasa vigente 2026."
+    },
+    {
+      "title": "¿Cuánto retiene la boleta de honorarios?",
+      "url": "https://herramientasonline.cl/guias/cuanto-retiene-boleta-honorarios",
+      "cluster": "Boleta de Honorarios",
+      "purpose": "Tasas de retención vigentes: 15,25% caso general y 18,25% con deuda Préstamo Solidario COVID."
+    },
+    {
+      "title": "Cómo calcular el líquido de una boleta de honorarios",
+      "url": "https://herramientasonline.cl/guias/como-calcular-boleta-honorarios-liquido",
+      "cluster": "Boleta de Honorarios",
+      "purpose": "Calcula el líquido desde el bruto o el bruto necesario para recibir un líquido específico."
+    },
+    {
+      "title": "Porcentaje de retención de boleta de honorarios en Chile 2026",
+      "url": "https://herramientasonline.cl/guias/boleta-honorarios-retencion-porcentaje",
+      "cluster": "Boleta de Honorarios",
+      "purpose": "Tabla con los porcentajes de retención vigentes y cómo han evolucionado desde 2019."
+    },
+    {
+      "title": "Cómo simular un crédito",
+      "url": "https://herramientasonline.cl/guias/simular-credito",
+      "cluster": "Simulador de Crédito",
+      "purpose": "Explica la fórmula del sistema francés, cómo leer una tabla de amortización y qué costos no incluye el simulador."
+    },
+    {
+      "title": "Simulador de crédito de consumo en Chile",
+      "url": "https://herramientasonline.cl/guias/simulador-credito-consumo-chile",
+      "cluster": "Simulador de Crédito",
+      "purpose": "Simula un crédito de consumo en Chile: cuota mensual, costo total e intereses."
+    },
+    {
+      "title": "Simulador de crédito hipotecario en Chile",
+      "url": "https://herramientasonline.cl/guias/simulador-credito-hipotecario",
+      "cluster": "Simulador de Crédito",
+      "purpose": "Simula un crédito hipotecario con tabla de amortización completa. Considera pie mínimo y seguros obligatorios."
+    },
+    {
+      "title": "Cómo calcular la cuota de un crédito",
+      "url": "https://herramientasonline.cl/guias/como-calcular-cuota-credito",
+      "cluster": "Simulador de Crédito",
+      "purpose": "Fórmula del sistema francés paso a paso, conversión tasa anual a mensual y tabla de amortización."
+    },
+    {
+      "title": "Cómo crear un link de WhatsApp con mensaje",
+      "url": "https://herramientasonline.cl/guias/link-whatsapp-con-mensaje",
+      "cluster": "Generador de Link de WhatsApp",
+      "purpose": "Crea un link wa.me con texto pre-cargado usando el parámetro ?text= para ventas y atención al cliente."
+    },
+    {
+      "title": "Crear link de WhatsApp para Instagram",
+      "url": "https://herramientasonline.cl/guias/crear-link-whatsapp-para-instagram",
+      "cluster": "Generador de Link de WhatsApp",
+      "purpose": "Cómo poner un link de WhatsApp en la bio de Instagram para recibir consultas directas."
+    },
+    {
+      "title": "Cómo hacer un link de WhatsApp",
+      "url": "https://herramientasonline.cl/guias/como-hacer-link-de-whatsapp",
+      "cluster": "Generador de Link de WhatsApp",
+      "purpose": "Dos métodos: manualmente con wa.me o con el generador automático gratuito."
+    },
+    {
+      "title": "WhatsApp Link Generator — Generador de link de WhatsApp",
+      "url": "https://herramientasonline.cl/guias/whatsapp-link-generator",
+      "cluster": "Generador de Link de WhatsApp",
+      "purpose": "Generador gratuito de link de WhatsApp para negocios y redes sociales en Chile y Latinoamérica."
+    }
+  ],
   "freshness_protocol": {
     "source_priority": [
       "Normativa oficial chilena vigente",

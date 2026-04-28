@@ -1,0 +1,47 @@
+# Herramientas Online
+
+> Domain: https://herramientasonline.cl
+> Language: es-CL
+> Audience: Emprendedores y profesionales independientes en Chile
+> Description: Herramientas gratuitas para calcular IVA, boletas de honorarios, cuotas de crédito y crear links de WhatsApp. Sin registro, sin fricción.
+
+## Herramientas
+
+- [Calculadora de IVA Chile](https://herramientasonline.cl/herramientas/calculadora-iva-chile): Calcula IVA 19%, monto neto y monto bruto para operaciones en Chile.
+- [Calculadora de Boleta de Honorarios](https://herramientasonline.cl/herramientas/calculadora-boleta-honorarios-chile): Calcula monto bruto, líquido y retención de boletas de honorarios. Tasa 2026: 15,25%.
+- [Simulador de Crédito](https://herramientasonline.cl/herramientas/simulador-credito): Calcula cuota mensual y tabla de amortización de un crédito con sistema francés.
+- [Generador de Link de WhatsApp](https://herramientasonline.cl/herramientas/generador-link-whatsapp): Crea enlaces directos wa.me con número y mensaje pre-cargado opcional.
+
+## Guías — IVA Chile
+
+- [Cómo calcular IVA en Chile](https://herramientasonline.cl/guias/calcular-iva-chile): Monto neto, IVA 19% y monto bruto explicados con fórmulas y ejemplos.
+- [Cómo calcular IVA desde un monto bruto](https://herramientasonline.cl/guias/calcular-iva-desde-monto-bruto): Divide el bruto por 1,19 para extraer neto e IVA. Incluye error frecuente a evitar.
+- [Cómo calcular IVA desde un monto neto](https://herramientasonline.cl/guias/calcular-iva-desde-monto-neto): Multiplica el neto por 1,19 para obtener el bruto. Tabla de referencia rápida.
+- [Cómo calcular el IVA 19% en Chile](https://herramientasonline.cl/guias/calcular-iva-19-porciento-chile): Fórmulas para ambas direcciones, con ejemplos y tabla.
+- [Cómo calcular el precio con IVA incluido](https://herramientasonline.cl/guias/como-calcular-precio-con-iva): Precio final con IVA = neto × 1,19.
+- [Cómo calcular el monto neto desde un precio bruto](https://herramientasonline.cl/guias/como-calcular-neto-desde-bruto): Extrae neto e IVA desde un total con impuesto incluido.
+- [¿Cuánto es el IVA en Chile?](https://herramientasonline.cl/guias/cuanto-es-el-iva-en-chile): El IVA en Chile es 19%. Qué aplica y qué está exento.
+- [Fórmula del IVA en Chile](https://herramientasonline.cl/guias/formula-del-iva-chile): Las dos fórmulas del IVA chileno con tabla de referencia.
+
+## Guías — Boleta de Honorarios
+
+- [Cómo calcular una boleta de honorarios](https://herramientasonline.cl/guias/boleta-honorarios-chile): Bruto, retención (15,25%) y líquido explicados con fórmulas. Guía 2026.
+- [Retención de boleta de honorarios 2026](https://herramientasonline.cl/guias/retencion-boleta-honorarios-2026): Tasa 2026: 15,25% general, 18,25% con deuda Préstamo Solidario COVID.
+- [Calcular el monto líquido de una boleta de honorarios](https://herramientasonline.cl/guias/calcular-liquido-boleta-honorarios): Fórmula: líquido = bruto × 0,8475.
+- [¿Cuánto retiene la boleta de honorarios?](https://herramientasonline.cl/guias/cuanto-retiene-boleta-honorarios): Tasas vigentes 2026 y cómo verificar si aplica tasa COVID.
+- [Cómo calcular el líquido de una boleta de honorarios](https://herramientasonline.cl/guias/como-calcular-boleta-honorarios-liquido): Desde bruto a líquido y desde líquido deseado a bruto a emitir.
+- [Porcentaje de retención de boleta de honorarios Chile 2026](https://herramientasonline.cl/guias/boleta-honorarios-retencion-porcentaje): Tabla histórica de tasas desde 2019 hasta 2028.
+
+## Guías — Simulador de Crédito
+
+- [Cómo simular un crédito](https://herramientasonline.cl/guias/simular-credito): Fórmula del sistema francés, tabla de amortización y costos que el simulador no incluye.
+- [Simulador de crédito de consumo en Chile](https://herramientasonline.cl/guias/simulador-credito-consumo-chile): Simula cuota, costo total e intereses para créditos de 12 a 60 meses.
+- [Simulador de crédito hipotecario en Chile](https://herramientasonline.cl/guias/simulador-credito-hipotecario): Simula créditos hipotecarios a 15, 20 o 30 años con tabla de amortización.
+- [Cómo calcular la cuota de un crédito](https://herramientasonline.cl/guias/como-calcular-cuota-credito): Fórmula C = P × [i(1+i)^n]/[(1+i)^n−1] explicada paso a paso.
+
+## Guías — Generador de Link de WhatsApp
+
+- [Cómo crear un link de WhatsApp con mensaje](https://herramientasonline.cl/guias/link-whatsapp-con-mensaje): wa.me con parámetro ?text= para mensaje pre-cargado.
+- [Crear link de WhatsApp para Instagram](https://herramientasonline.cl/guias/crear-link-whatsapp-para-instagram): Cómo poner el link en la bio de Instagram para recibir consultas.
+- [Cómo hacer un link de WhatsApp](https://herramientasonline.cl/guias/como-hacer-link-de-whatsapp): Manual con wa.me o automático con el generador gratuito.
+- [WhatsApp Link Generator](https://herramientasonline.cl/guias/whatsapp-link-generator): Generador gratuito para negocios y redes sociales en Chile y Latinoamérica.
